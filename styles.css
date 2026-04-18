@@ -921,9 +921,8 @@ footer .foot-bottom .it { font-style: italic; }
     grid-row: auto;
   }
   .cs-cell {
-    height: auto;
+    height: 200px;
     min-height: unset;
-    max-height: 200px;
     overflow: hidden;
     box-sizing: border-box;
   }
