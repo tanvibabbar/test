@@ -12,138 +12,346 @@
 
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
-  
-<script type="text/babel">
+<script>
 /* ============================================================
    components.jsx (inlined)
    ============================================================ */
 /* Components */
-const { useState, useEffect, useRef, useMemo } = React;
+const {
+  useState,
+  useEffect,
+  useRef,
+  useMemo
+} = React;
 
 // ---- Icon helpers ----
-function IconSearch({size=18}) {
-  return <svg width={size} height={size} viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5"><circle cx="9" cy="9" r="6"/><path d="m14 14 4 4"/></svg>;
+function IconSearch({
+  size = 18
+}) {
+  return /*#__PURE__*/React.createElement("svg", {
+    width: size,
+    height: size,
+    viewBox: "0 0 20 20",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.5"
+  }, /*#__PURE__*/React.createElement("circle", {
+    cx: "9",
+    cy: "9",
+    r: "6"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "m14 14 4 4"
+  }));
 }
-function IconBag({size=18}) {
-  return <svg width={size} height={size} viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M4 7h12l-1 10H5L4 7z"/><path d="M7 7V5a3 3 0 0 1 6 0v2"/></svg>;
+function IconBag({
+  size = 18
+}) {
+  return /*#__PURE__*/React.createElement("svg", {
+    width: size,
+    height: size,
+    viewBox: "0 0 20 20",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.5"
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M4 7h12l-1 10H5L4 7z"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M7 7V5a3 3 0 0 1 6 0v2"
+  }));
 }
-function IconArrow({dir="right", size=16}) {
-  return <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" style={{transform: dir==="left" ? "rotate(180deg)" : "none"}}><path d="M5 12h14M13 6l6 6-6 6"/></svg>;
+function IconArrow({
+  dir = "right",
+  size = 16
+}) {
+  return /*#__PURE__*/React.createElement("svg", {
+    width: size,
+    height: size,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.6",
+    style: {
+      transform: dir === "left" ? "rotate(180deg)" : "none"
+    }
+  }, /*#__PURE__*/React.createElement("path", {
+    d: "M5 12h14M13 6l6 6-6 6"
+  }));
 }
-function IconCert({label}) {
-  return <svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" strokeWidth="1.5">
-    <circle cx="22" cy="18" r="10"/><path d="M14 26l-4 12 12-4 12 4-4-12"/><text x="22" y="21" textAnchor="middle" fontSize="8" stroke="none" fill="currentColor" fontFamily="Funnel Sans">{label}</text>
-  </svg>;
+function IconCert({
+  label
+}) {
+  return /*#__PURE__*/React.createElement("svg", {
+    width: "44",
+    height: "44",
+    viewBox: "0 0 44 44",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.5"
+  }, /*#__PURE__*/React.createElement("circle", {
+    cx: "22",
+    cy: "18",
+    r: "10"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M14 26l-4 12 12-4 12 4-4-12"
+  }), /*#__PURE__*/React.createElement("text", {
+    x: "22",
+    y: "21",
+    textAnchor: "middle",
+    fontSize: "8",
+    stroke: "none",
+    fill: "currentColor",
+    fontFamily: "Funnel Sans"
+  }, label));
 }
 
 // ---- Nav ----
 // ---- Brand logo (uses real Figma Wordmark.svg) ----
-function BrandLogo({ color = 'var(--coffee)' }) {
-  return (
-    <span className="brandmark" aria-label="second form" style={{color}}>
-      <img src="assets/Wordmark.svg" alt="second form" className="bm-wordmark"/>
-    </span>
-  );
+function BrandLogo({
+  color = 'var(--coffee)'
+}) {
+  return /*#__PURE__*/React.createElement("span", {
+    className: "brandmark",
+    "aria-label": "second form",
+    style: {
+      color
+    }
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "assets/Wordmark.svg",
+    alt: "second form",
+    className: "bm-wordmark"
+  }));
 }
-
-function IconMenu({size=20}) {
-  return <svg width={size} height={size} viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5"><line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/></svg>;
+function IconMenu({
+  size = 20
+}) {
+  return /*#__PURE__*/React.createElement("svg", {
+    width: size,
+    height: size,
+    viewBox: "0 0 20 20",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.5"
+  }, /*#__PURE__*/React.createElement("line", {
+    x1: "3",
+    y1: "5",
+    x2: "17",
+    y2: "5"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "3",
+    y1: "10",
+    x2: "17",
+    y2: "10"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "3",
+    y1: "15",
+    x2: "17",
+    y2: "15"
+  }));
 }
-function IconClose({size=20}) {
-  return <svg width={size} height={size} viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5"><line x1="4" y1="4" x2="16" y2="16"/><line x1="16" y1="4" x2="4" y2="16"/></svg>;
+function IconClose({
+  size = 20
+}) {
+  return /*#__PURE__*/React.createElement("svg", {
+    width: size,
+    height: size,
+    viewBox: "0 0 20 20",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.5"
+  }, /*#__PURE__*/React.createElement("line", {
+    x1: "4",
+    y1: "4",
+    x2: "16",
+    y2: "16"
+  }), /*#__PURE__*/React.createElement("line", {
+    x1: "16",
+    y1: "4",
+    x2: "4",
+    y2: "16"
+  }));
 }
-
-function Nav({ page, navigate }) {
+function Nav({
+  page,
+  navigate
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const links = ["New In","Bestsellers","Women","Men","Shop by Style","Recycled","Fabrics","About","Corporate Orders"];
-
+  const links = ["New In", "Bestsellers", "Women", "Men", "Shop by Style", "Recycled", "Fabrics", "About", "Corporate Orders"];
   const handleLink = (e, l) => {
     e.preventDefault();
     setMenuOpen(false);
-    if (l === "Corporate Orders") { navigate('b2b'); return; }
+    if (l === "Corporate Orders") {
+      navigate('b2b');
+      return;
+    }
     if (l === 'Fabrics') {
       const el = document.getElementById('fabrics-section');
-      if (el) { const top = el.getBoundingClientRect().top + window.scrollY - 80; window.scrollTo({top, behavior:'smooth'}); }
+      if (el) {
+        const top = el.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({
+          top,
+          behavior: 'smooth'
+        });
+      }
       return;
     }
     navigate('home');
   };
-
-  return (
-    <>
-      <div className="nav">
-        <a href="#" className="logo" onClick={e=>{e.preventDefault(); navigate('home')}} aria-label="second form">
-          <BrandLogo/>
-        </a>
-        <div className="nav-links">
-          {links.map(l => {
-            const isCorp = l === "Corporate Orders";
-            return (
-              <a key={l} href="#" onClick={(e) => handleLink(e, l)}
-                className={isCorp && page === 'b2b' ? 'active' : (l==='New In' && page==='home' ? 'active':'')}>{l}</a>
-            );
-          })}
-        </div>
-        <div className="nav-icons">
-          <button aria-label="search"><IconSearch/></button>
-          <button aria-label="bag" style={{position:'relative'}}><IconBag/><span style={{position:'absolute',top:2,right:2,width:14,height:14,borderRadius:'50%',background:'var(--chocolate)',color:'#fff',fontSize:9,display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'Funnel Sans'}}>2</span></button>
-          <button className="nav-hamburger" aria-label="open menu" onClick={() => setMenuOpen(true)}><IconMenu/></button>
-        </div>
-      </div>
-
-      {/* Mobile drawer */}
-      <div className={"mobile-drawer" + (menuOpen ? ' open' : '')} aria-hidden={!menuOpen}>
-        <div className="mobile-drawer-header">
-          <BrandLogo/>
-          <button className="mobile-drawer-close" aria-label="close menu" onClick={() => setMenuOpen(false)}><IconClose size={22}/></button>
-        </div>
-        <nav className="mobile-drawer-links">
-          {links.map(l => (
-            <a key={l} href="#" onClick={(e) => handleLink(e, l)}
-              className={l === "Corporate Orders" && page === 'b2b' ? 'active' : (l==='New In' && page==='home' ? 'active':'')}>{l}</a>
-          ))}
-        </nav>
-        <div className="mobile-drawer-footer">
-          <button aria-label="search" className="mobile-drawer-icon"><IconSearch size={20}/></button>
-          <button aria-label="bag" className="mobile-drawer-icon" style={{position:'relative'}}><IconBag size={20}/><span style={{position:'absolute',top:0,right:0,width:14,height:14,borderRadius:'50%',background:'var(--chocolate)',color:'#fff',fontSize:9,display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'Funnel Sans'}}>2</span></button>
-        </div>
-      </div>
-      {menuOpen && <div className="mobile-drawer-backdrop" onClick={() => setMenuOpen(false)}/>}
-    </>
-  );
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    className: "nav"
+  }, /*#__PURE__*/React.createElement("a", {
+    href: "#",
+    className: "logo",
+    onClick: e => {
+      e.preventDefault();
+      navigate('home');
+    },
+    "aria-label": "second form"
+  }, /*#__PURE__*/React.createElement(BrandLogo, null)), /*#__PURE__*/React.createElement("div", {
+    className: "nav-links"
+  }, links.map(l => {
+    const isCorp = l === "Corporate Orders";
+    return /*#__PURE__*/React.createElement("a", {
+      key: l,
+      href: "#",
+      onClick: e => handleLink(e, l),
+      className: isCorp && page === 'b2b' ? 'active' : l === 'New In' && page === 'home' ? 'active' : ''
+    }, l);
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "nav-icons"
+  }, /*#__PURE__*/React.createElement("button", {
+    "aria-label": "search"
+  }, /*#__PURE__*/React.createElement(IconSearch, null)), /*#__PURE__*/React.createElement("button", {
+    "aria-label": "bag",
+    style: {
+      position: 'relative'
+    }
+  }, /*#__PURE__*/React.createElement(IconBag, null), /*#__PURE__*/React.createElement("span", {
+    style: {
+      position: 'absolute',
+      top: 2,
+      right: 2,
+      width: 14,
+      height: 14,
+      borderRadius: '50%',
+      background: 'var(--chocolate)',
+      color: '#fff',
+      fontSize: 9,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontFamily: 'Funnel Sans'
+    }
+  }, "2")), /*#__PURE__*/React.createElement("button", {
+    className: "nav-hamburger",
+    "aria-label": "open menu",
+    onClick: () => setMenuOpen(true)
+  }, /*#__PURE__*/React.createElement(IconMenu, null)))), /*#__PURE__*/React.createElement("div", {
+    className: "mobile-drawer" + (menuOpen ? ' open' : ''),
+    "aria-hidden": !menuOpen
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "mobile-drawer-header"
+  }, /*#__PURE__*/React.createElement(BrandLogo, null), /*#__PURE__*/React.createElement("button", {
+    className: "mobile-drawer-close",
+    "aria-label": "close menu",
+    onClick: () => setMenuOpen(false)
+  }, /*#__PURE__*/React.createElement(IconClose, {
+    size: 22
+  }))), /*#__PURE__*/React.createElement("nav", {
+    className: "mobile-drawer-links"
+  }, links.map(l => /*#__PURE__*/React.createElement("a", {
+    key: l,
+    href: "#",
+    onClick: e => handleLink(e, l),
+    className: l === "Corporate Orders" && page === 'b2b' ? 'active' : l === 'New In' && page === 'home' ? 'active' : ''
+  }, l))), /*#__PURE__*/React.createElement("div", {
+    className: "mobile-drawer-footer"
+  }, /*#__PURE__*/React.createElement("button", {
+    "aria-label": "search",
+    className: "mobile-drawer-icon"
+  }, /*#__PURE__*/React.createElement(IconSearch, {
+    size: 20
+  })), /*#__PURE__*/React.createElement("button", {
+    "aria-label": "bag",
+    className: "mobile-drawer-icon",
+    style: {
+      position: 'relative'
+    }
+  }, /*#__PURE__*/React.createElement(IconBag, {
+    size: 20
+  }), /*#__PURE__*/React.createElement("span", {
+    style: {
+      position: 'absolute',
+      top: 0,
+      right: 0,
+      width: 14,
+      height: 14,
+      borderRadius: '50%',
+      background: 'var(--chocolate)',
+      color: '#fff',
+      fontSize: 9,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      fontFamily: 'Funnel Sans'
+    }
+  }, "2")))), menuOpen && /*#__PURE__*/React.createElement("div", {
+    className: "mobile-drawer-backdrop",
+    onClick: () => setMenuOpen(false)
+  }));
 }
 
 // ---- Decorative rotating vector ----
-function DecoVector({ className, rot }) {
-  return (
-    <div className={"deco-vector " + className} style={{ transform: `rotate(${rot}deg)`, willChange: "transform" }} />
-  );
+function DecoVector({
+  className,
+  rot
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "deco-vector " + className,
+    style: {
+      transform: `rotate(${rot}deg)`,
+      willChange: "transform"
+    }
+  });
 }
 
 // ---- Product Card ----
-function ProductCard({img, name, sub, price, overlay}) {
-  return (
-    <div className="product-card reveal">
-      <div className="img-wrap">
-        <img src={img} alt={name}/>
-        {overlay && <img src={overlay} alt="" style={{position:'absolute',inset:0}}/>}
-        <div className="quick-add">Quick Add +</div>
-      </div>
-      <div className="meta">
-        <div>
-          <div className="name">{name}</div>
-          <div className="sub">{sub}</div>
-        </div>
-        <div className="price">{price}</div>
-      </div>
-    </div>
-  );
+function ProductCard({
+  img,
+  name,
+  sub,
+  price,
+  overlay
+}) {
+  return /*#__PURE__*/React.createElement("div", {
+    className: "product-card reveal"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "img-wrap"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: img,
+    alt: name
+  }), overlay && /*#__PURE__*/React.createElement("img", {
+    src: overlay,
+    alt: "",
+    style: {
+      position: 'absolute',
+      inset: 0
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "quick-add"
+  }, "Quick Add +")), /*#__PURE__*/React.createElement("div", {
+    className: "meta"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "name"
+  }, name), /*#__PURE__*/React.createElement("div", {
+    className: "sub"
+  }, sub)), /*#__PURE__*/React.createElement("div", {
+    className: "price"
+  }, price)));
 }
 
 // ---- Animated word for scroll color ----
 function LoungePhrase() {
-  const tweaks = (typeof window !== 'undefined' && window.__tweaks) || {};
+  const tweaks = typeof window !== 'undefined' && window.__tweaks || {};
   const baseText = "lounge and hybrid wear that moves with your life, from home to errands, work to travel, without ever asking you to choose between comfort and style.";
   const text = tweaks.loungePhraseUppercase ? baseText.toUpperCase() : baseText;
   const words = text.split(" ");
@@ -160,102 +368,163 @@ function LoungePhrase() {
       setProgress(p);
     }
     onScroll();
-    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('scroll', onScroll, {
+      passive: true
+    });
     window.addEventListener('resize', onScroll);
-    return () => {window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll)};
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', onScroll);
+    };
   }, []);
-
-  return (
-    <section className="lounge-phrase" ref={ref}>
-      <DecoVector className="v2" rot={-progress * 360} />
-      <h2>
-        {words.map((w,i) => {
-          const wordP = i / words.length;
-          const on = progress * 1.15 > wordP;
-          return (
-            <span key={i} className="w" style={{
-              color: on ? 'var(--chocolate)' : 'var(--bone-2)'
-            }}>{w}</span>
-          );
-        })}
-      </h2>
-    </section>
-  );
+  return /*#__PURE__*/React.createElement("section", {
+    className: "lounge-phrase",
+    ref: ref
+  }, /*#__PURE__*/React.createElement(DecoVector, {
+    className: "v2",
+    rot: -progress * 360
+  }), /*#__PURE__*/React.createElement("h2", null, words.map((w, i) => {
+    const wordP = i / words.length;
+    const on = progress * 1.15 > wordP;
+    return /*#__PURE__*/React.createElement("span", {
+      key: i,
+      className: "w",
+      style: {
+        color: on ? 'var(--chocolate)' : 'var(--bone-2)'
+      }
+    }, w);
+  })));
 }
 
 /* ============================================================
    interactive.jsx (inlined)
    ============================================================ */
-const FABRICS = [
-  { key: 'terry', name: 'French Terry', eyebrow: 'Second-Skin Softness', title: 'ULTRA SOFT WITH\nEFFORTLESS BREATHABILITY',
-    desc: 'Our signature French Terry is brushed for a plush hand-feel on the inside and a clean, structured drape on the outside — built to soften beautifully with every wash.',
-    img: 'assets/fabric.jpg', props: [['72%','Organic Cotton'],['260 GSM','Midweight'],['PRE-SHRUNK','Finished'],['CERTIFIED','GOTS']]},
-  { key: 'jersey', name: 'Ribbed Jersey', eyebrow: 'Fluid Movement', title: '4-way stretch that adapts to your body',
-    desc: 'A close-knit rib with a weighted, resilient feel. Sculpts softly, holds its shape, and moves with you — equal parts lounge and street.',
-    img: 'assets/prod2.png', props: [['88%','Modal Cotton'],['220 gsm','Lightweight'],['Anti-pill','Treated'],['Made in','India']]},
-  { key: 'pima', name: 'Combed Pima', eyebrow: 'Everyday Essential', title: 'Made for daily wear with all-day ease',
-    desc: 'Long-staple Pima, combed twice for an unusually smooth surface. Cool to the touch, unbothered by wrinkles, and engineered to outlast trends.',
-    img: 'assets/prod1.png', props: [['100%','Pima Cotton'],['180 gsm','Breathable'],['Machine','Washable'],['Oeko-Tex','100']]},
-  { key: 'linen', name: 'Tumbled Linen', eyebrow: 'Quiet Luxury', title: 'Airy, relaxed, lived-in from day one',
-    desc: 'Stone-washed European flax with a crumpled, characterful drape. Cooler than cotton, lighter than it looks, and only better-looking with age.',
-    img: 'assets/prod4.jpg', props: [['100%','European Flax'],['160 gsm','Summer']]},
-  { key: 'fleece', name: 'Brushed Fleece', eyebrow: 'Warm & Weightless', title: 'Insulated comfort, without the bulk',
-    desc: 'Loft-spun fleece with a quick-dry inner face. The warmth of heavier knits without giving up drape or breathability.',
-    img: 'assets/prod3.jpg', props: [['65%','Recycled Poly'],['320 gsm','Heavy']]},
-  { key: 'modal', name: 'Soft Modal', eyebrow: 'Second-Skin Softness', title: 'Silken drape with breathable structure',
-    desc: 'Botanical fibres spun into a featherweight jersey. Wears like water against the skin and settles into your body without clinging.',
-    img: 'assets/top.png', props: [['95%','Modal'],['170 gsm','Light']]},
-  { key: 'canvas', name: 'Washed Canvas', eyebrow: 'Built for Travel', title: 'Durable structure, broken-in feel',
-    desc: 'Heavy-grain cotton canvas, enzyme-washed until it moves like it\'s been yours for years. Holds tailoring; forgives everything.',
-    img: 'assets/pants.png', props: [['100%','Heavy Cotton'],['340 gsm','Structured']]},
-];
-
+const FABRICS = [{
+  key: 'terry',
+  name: 'French Terry',
+  eyebrow: 'Second-Skin Softness',
+  title: 'ULTRA SOFT WITH\nEFFORTLESS BREATHABILITY',
+  desc: 'Our signature French Terry is brushed for a plush hand-feel on the inside and a clean, structured drape on the outside — built to soften beautifully with every wash.',
+  img: 'assets/fabric.jpg',
+  props: [['72%', 'Organic Cotton'], ['260 GSM', 'Midweight'], ['PRE-SHRUNK', 'Finished'], ['CERTIFIED', 'GOTS']]
+}, {
+  key: 'jersey',
+  name: 'Ribbed Jersey',
+  eyebrow: 'Fluid Movement',
+  title: '4-way stretch that adapts to your body',
+  desc: 'A close-knit rib with a weighted, resilient feel. Sculpts softly, holds its shape, and moves with you — equal parts lounge and street.',
+  img: 'assets/prod2.png',
+  props: [['88%', 'Modal Cotton'], ['220 gsm', 'Lightweight'], ['Anti-pill', 'Treated'], ['Made in', 'India']]
+}, {
+  key: 'pima',
+  name: 'Combed Pima',
+  eyebrow: 'Everyday Essential',
+  title: 'Made for daily wear with all-day ease',
+  desc: 'Long-staple Pima, combed twice for an unusually smooth surface. Cool to the touch, unbothered by wrinkles, and engineered to outlast trends.',
+  img: 'assets/prod1.png',
+  props: [['100%', 'Pima Cotton'], ['180 gsm', 'Breathable'], ['Machine', 'Washable'], ['Oeko-Tex', '100']]
+}, {
+  key: 'linen',
+  name: 'Tumbled Linen',
+  eyebrow: 'Quiet Luxury',
+  title: 'Airy, relaxed, lived-in from day one',
+  desc: 'Stone-washed European flax with a crumpled, characterful drape. Cooler than cotton, lighter than it looks, and only better-looking with age.',
+  img: 'assets/prod4.jpg',
+  props: [['100%', 'European Flax'], ['160 gsm', 'Summer']]
+}, {
+  key: 'fleece',
+  name: 'Brushed Fleece',
+  eyebrow: 'Warm & Weightless',
+  title: 'Insulated comfort, without the bulk',
+  desc: 'Loft-spun fleece with a quick-dry inner face. The warmth of heavier knits without giving up drape or breathability.',
+  img: 'assets/prod3.jpg',
+  props: [['65%', 'Recycled Poly'], ['320 gsm', 'Heavy']]
+}, {
+  key: 'modal',
+  name: 'Soft Modal',
+  eyebrow: 'Second-Skin Softness',
+  title: 'Silken drape with breathable structure',
+  desc: 'Botanical fibres spun into a featherweight jersey. Wears like water against the skin and settles into your body without clinging.',
+  img: 'assets/top.png',
+  props: [['95%', 'Modal'], ['170 gsm', 'Light']]
+}, {
+  key: 'canvas',
+  name: 'Washed Canvas',
+  eyebrow: 'Built for Travel',
+  title: 'Durable structure, broken-in feel',
+  desc: 'Heavy-grain cotton canvas, enzyme-washed until it moves like it\'s been yours for years. Holds tailoring; forgives everything.',
+  img: 'assets/pants.png',
+  props: [['100%', 'Heavy Cotton'], ['340 gsm', 'Structured']]
+}];
 function Fabrics() {
   const [active, setActive] = useState(0);
   const f = FABRICS[active];
-  return (
-    <section className="fabrics" id="fabrics-section">
-      <span className="eyebrow" style={{display:'block', textAlign:'center', color:'var(--chocolate)', marginBottom:12}}>OUR FABRICS</span>
-      <h2>OUR FABRICS</h2>
-      <div className="fabric-tabs">
-        {FABRICS.map((ff, i) => (
-          <button key={ff.key} className={"fabric-tab " + (i===active?'active':'')} onClick={()=>setActive(i)}>
-            {ff.name}
-          </button>
-        ))}
-      </div>
-      <div className="fabric-viewer">
-        <div className="fabric-card" key={active}>
-          <div className="fabric-swatch">
-            <div className="inner" style={{backgroundImage:`url(${f.img})`}} data-name={f.name}/>
-          </div>
-          <div className="fabric-info">
-            <span className="eyebrow">{f.eyebrow}</span>
-            <h3>{f.title}</h3>
-            <p>{f.desc}</p>
-            <div className="fabric-props">
-              {f.props.map(([b,s],i) => (
-                <div key={i} className="fabric-prop"><b>{b}</b><span>{s}</span></div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
+  return /*#__PURE__*/React.createElement("section", {
+    className: "fabrics",
+    id: "fabrics-section"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "eyebrow",
+    style: {
+      display: 'block',
+      textAlign: 'center',
+      color: 'var(--chocolate)',
+      marginBottom: 12
+    }
+  }, "OUR FABRICS"), /*#__PURE__*/React.createElement("h2", null, "OUR FABRICS"), /*#__PURE__*/React.createElement("div", {
+    className: "fabric-tabs"
+  }, FABRICS.map((ff, i) => /*#__PURE__*/React.createElement("button", {
+    key: ff.key,
+    className: "fabric-tab " + (i === active ? 'active' : ''),
+    onClick: () => setActive(i)
+  }, ff.name))), /*#__PURE__*/React.createElement("div", {
+    className: "fabric-viewer"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fabric-card",
+    key: active
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "fabric-swatch"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "inner",
+    style: {
+      backgroundImage: `url(${f.img})`
+    },
+    "data-name": f.name
+  })), /*#__PURE__*/React.createElement("div", {
+    className: "fabric-info"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "eyebrow"
+  }, f.eyebrow), /*#__PURE__*/React.createElement("h3", null, f.title), /*#__PURE__*/React.createElement("p", null, f.desc), /*#__PURE__*/React.createElement("div", {
+    className: "fabric-props"
+  }, f.props.map(([b, s], i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "fabric-prop"
+  }, /*#__PURE__*/React.createElement("b", null, b), /*#__PURE__*/React.createElement("span", null, s))))))));
 }
-
-const TESTIMONIALS = [
-  { quote: "The quality is exceptional. Every piece feels luxurious and thoughtfully made. These have become my go-to pieces for work from home and beyond.",
-    name: "— Priya Sharma", city: "BENGALURU", link: "Shop the Co-ord Collection", img: "assets/prod3.jpg" },
-  { quote: "Finally found a brand that understands comfort without compromising style. The fabrics are soft and the fit is perfect. Worth every penny!",
-    name: "— Kabir Patel", city: "MUMBAI", link: "Shop the Lounge Collection", img: "assets/prod2.png" },
-  { quote: "The sustainable approach and attention to detail make this brand stand out. These pieces last and only get better with time. Highly recommend!",
-    name: "— Rohan Kumar", city: "DELHI", link: "Shop the Hoodie Collection", img: "assets/prod1.png" },
-  { quote: "Love the minimalist aesthetic. Every piece is versatile and well-made. Perfect for my lifestyle — from meetings to coffee runs to relaxing at home.",
-    name: "— Aditya Singh", city: "PUNE", link: "Shop the Hybrid Collection", img: "assets/prod4.jpg" },
-];
-
+const TESTIMONIALS = [{
+  quote: "The quality is exceptional. Every piece feels luxurious and thoughtfully made. These have become my go-to pieces for work from home and beyond.",
+  name: "— Priya Sharma",
+  city: "BENGALURU",
+  link: "Shop the Co-ord Collection",
+  img: "assets/prod3.jpg"
+}, {
+  quote: "Finally found a brand that understands comfort without compromising style. The fabrics are soft and the fit is perfect. Worth every penny!",
+  name: "— Kabir Patel",
+  city: "MUMBAI",
+  link: "Shop the Lounge Collection",
+  img: "assets/prod2.png"
+}, {
+  quote: "The sustainable approach and attention to detail make this brand stand out. These pieces last and only get better with time. Highly recommend!",
+  name: "— Rohan Kumar",
+  city: "DELHI",
+  link: "Shop the Hoodie Collection",
+  img: "assets/prod1.png"
+}, {
+  quote: "Love the minimalist aesthetic. Every piece is versatile and well-made. Perfect for my lifestyle — from meetings to coffee runs to relaxing at home.",
+  name: "— Aditya Singh",
+  city: "PUNE",
+  link: "Shop the Hybrid Collection",
+  img: "assets/prod4.jpg"
+}];
 function Testimonials() {
   const [i, setI] = useState(0);
   const t = TESTIMONIALS[i];
@@ -265,252 +534,373 @@ function Testimonials() {
     const id = setInterval(next, 7000);
     return () => clearInterval(id);
   }, [i]);
-  return (
-    <section className="testimonials">
-      <span className="eyebrow">CUSTOMER STORIES</span>
-      <h2>WHAT OUR CUSTOMERS SAY</h2>
-      <div className="testi-viewer">
-        <div className="testi-image" key={'img'+i} style={{backgroundImage: `url(${t.img})`}}>
-          <div style={{position:'absolute', top:16, left:16, background:'rgba(255,255,255,0.9)', padding:'6px 10px', fontSize:11, letterSpacing:'0.1em', fontFamily:'Funnel Sans'}}>{t.city}</div>
-        </div>
-        <div className="testi-body" key={'body'+i}>
-          <blockquote style={{animation:'fadein 0.5s both'}}>"{t.quote}"</blockquote>
-          <cite>{t.name}</cite>
-          <br/>
-          <a href="#" className="collection-link">{t.link} →</a>
-          <div className="testi-nav">
-            <button onClick={prev}><IconArrow dir="left"/></button>
-            <button onClick={next}><IconArrow/></button>
-            <div className="testi-dots">
-              {TESTIMONIALS.map((_,idx) => <span key={idx} className={idx===i?'active':''} onClick={()=>setI(idx)}/>)}
-            </div>
-          </div>
-        </div>
-      </div>
-      <style>{`@keyframes fadein { from { opacity:0; transform: translateY(12px);} to {opacity:1; transform:none;} }`}</style>
-    </section>
-  );
+  return /*#__PURE__*/React.createElement("section", {
+    className: "testimonials"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "eyebrow"
+  }, "CUSTOMER STORIES"), /*#__PURE__*/React.createElement("h2", null, "WHAT OUR CUSTOMERS SAY"), /*#__PURE__*/React.createElement("div", {
+    className: "testi-viewer"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "testi-image",
+    key: 'img' + i,
+    style: {
+      backgroundImage: `url(${t.img})`
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      top: 16,
+      left: 16,
+      background: 'rgba(255,255,255,0.9)',
+      padding: '6px 10px',
+      fontSize: 11,
+      letterSpacing: '0.1em',
+      fontFamily: 'Funnel Sans'
+    }
+  }, t.city)), /*#__PURE__*/React.createElement("div", {
+    className: "testi-body",
+    key: 'body' + i
+  }, /*#__PURE__*/React.createElement("blockquote", {
+    style: {
+      animation: 'fadein 0.5s both'
+    }
+  }, "\"", t.quote, "\""), /*#__PURE__*/React.createElement("cite", null, t.name), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("a", {
+    href: "#",
+    className: "collection-link"
+  }, t.link, " \u2192"), /*#__PURE__*/React.createElement("div", {
+    className: "testi-nav"
+  }, /*#__PURE__*/React.createElement("button", {
+    onClick: prev
+  }, /*#__PURE__*/React.createElement(IconArrow, {
+    dir: "left"
+  })), /*#__PURE__*/React.createElement("button", {
+    onClick: next
+  }, /*#__PURE__*/React.createElement(IconArrow, null)), /*#__PURE__*/React.createElement("div", {
+    className: "testi-dots"
+  }, TESTIMONIALS.map((_, idx) => /*#__PURE__*/React.createElement("span", {
+    key: idx,
+    className: idx === i ? 'active' : '',
+    onClick: () => setI(idx)
+  })))))), /*#__PURE__*/React.createElement("style", null, `@keyframes fadein { from { opacity:0; transform: translateY(12px);} to {opacity:1; transform:none;} }`));
 }
-
-const CS_FABRICS = [
-  { key: 'cloudsoft', label: 'CLOUDSOFT™', ribbon: 'CLOUDSOFT\n™', img: 'assets/fabric2.png',
-    cells: [
-      ['SECOND-SKIN SOFTNESS', 'Ultra-soft with effortless breathability.'],
-      ['FLUID MOVEMENT', '4-way stretch that adapts naturally to your body.'],
-      ['AIRY COMFORT', 'Soft & comfortable, easy to wear fabric and suited for all climates.'],
-      ['EVERYDAY ESSENTIAL', 'Made for daily wear with all-day ease.'],
-    ]},
-  { key: 'luxemodal', label: 'LUXEMODAL™', ribbon: 'SILK-LIKE LUXURY', img: 'assets/fabric.jpg',
-    cells: [
-      ['SILK-LIKE TOUCH', 'Smooth, polished softness with a refined hand feel.'],
-      ['LIGHT STRETCH', 'Gentle flexibility that moves without effort.'],
-      ['BALANCED BREATHABILITY', 'Keeps you comfortable across changing moments.'],
-      ['ELEVATED EASE', 'Perfect for lounging or dressing up your basics.'],
-    ]},
-  { key: 'airsoft', label: 'AIRSOFT™', ribbon: 'FEATHER-LIGHT AIR', img: 'assets/fabric.jpg',
-    cells: [
-      ['FEATHER-LIGHT FEEL', 'Barely-there weight for effortless summer layering.'],
-      ['MOISTURE WICKING', 'Pulls sweat away to keep you cool under pressure.'],
-      ['QUICK DRY', 'Ready to wear again in a fraction of the time.'],
-      ['ALL-DAY COMFORT', 'Designed to breathe wherever the day takes you.'],
-    ]},
-  { key: 'ecosoft', label: 'ECOSOFT™', ribbon: 'PLANT-POWERED COMFORT', img: 'assets/fabric2.png',
-    cells: [
-      ['PLANT-BASED FIBERS', 'Spun from responsibly grown, low-impact crops.'],
-      ['NATURALLY SOFT', 'A plush hand-feel that gets better with every wash.'],
-      ['LOW-IMPACT', 'Produced with a fraction of the water of conventional cotton.'],
-      ['WARDROBE STAPLE', 'Made to outlast trends, not the planet.'],
-    ]},
-  { key: 'ecolite', label: 'ECOLITE™', ribbon: 'LIGHT & LIVED-IN', img: 'assets/fabric.jpg',
-    cells: [
-      ['LIGHTWEIGHT', 'Airy, fluid drape for warmer months.'],
-      ['BREATHABLE', 'Open weave keeps the air moving.'],
-      ['RECYCLED BLEND', 'Made from reclaimed plant fibers.'],
-      ['LIVED-IN LOOK', 'A softer, relaxed aesthetic right out of the bag.'],
-    ]},
-  { key: 'sculptstretch', label: 'SCULPTSTRETCH™', ribbon: 'HOLD & RELEASE', img: 'assets/fabric2.png',
-    cells: [
-      ['SUPPORTIVE STRETCH', 'Holds you in without holding you back.'],
-      ['RECOVERY', 'Snaps back to shape, wear after wear.'],
-      ['SMOOTH SILHOUETTE', 'A clean, sculpted line under everything.'],
-      ['ALL-WAY FLEX', 'Designed for movement in every direction.'],
-    ]},
-  { key: 'texturerib', label: 'TEXTURERIB™', ribbon: 'RIBBED & READY', img: 'assets/fabric.jpg',
-    cells: [
-      ['TEXTURED HAND', 'A tactile rib with dimensional depth.'],
-      ['BODY-SKIMMING', 'Follows your shape without clinging.'],
-      ['STRUCTURED STRETCH', 'Holds its form through the day.'],
-      ['ENDLESSLY LAYERABLE', 'Pairs with everything in the wardrobe.'],
-    ]},
-];
-
+const CS_FABRICS = [{
+  key: 'cloudsoft',
+  label: 'CLOUDSOFT™',
+  ribbon: 'CLOUDSOFT\n™',
+  img: 'assets/fabric2.png',
+  cells: [['SECOND-SKIN SOFTNESS', 'Ultra-soft with effortless breathability.'], ['FLUID MOVEMENT', '4-way stretch that adapts naturally to your body.'], ['AIRY COMFORT', 'Soft & comfortable, easy to wear fabric and suited for all climates.'], ['EVERYDAY ESSENTIAL', 'Made for daily wear with all-day ease.']]
+}, {
+  key: 'luxemodal',
+  label: 'LUXEMODAL™',
+  ribbon: 'SILK-LIKE LUXURY',
+  img: 'assets/fabric.jpg',
+  cells: [['SILK-LIKE TOUCH', 'Smooth, polished softness with a refined hand feel.'], ['LIGHT STRETCH', 'Gentle flexibility that moves without effort.'], ['BALANCED BREATHABILITY', 'Keeps you comfortable across changing moments.'], ['ELEVATED EASE', 'Perfect for lounging or dressing up your basics.']]
+}, {
+  key: 'airsoft',
+  label: 'AIRSOFT™',
+  ribbon: 'FEATHER-LIGHT AIR',
+  img: 'assets/fabric.jpg',
+  cells: [['FEATHER-LIGHT FEEL', 'Barely-there weight for effortless summer layering.'], ['MOISTURE WICKING', 'Pulls sweat away to keep you cool under pressure.'], ['QUICK DRY', 'Ready to wear again in a fraction of the time.'], ['ALL-DAY COMFORT', 'Designed to breathe wherever the day takes you.']]
+}, {
+  key: 'ecosoft',
+  label: 'ECOSOFT™',
+  ribbon: 'PLANT-POWERED COMFORT',
+  img: 'assets/fabric2.png',
+  cells: [['PLANT-BASED FIBERS', 'Spun from responsibly grown, low-impact crops.'], ['NATURALLY SOFT', 'A plush hand-feel that gets better with every wash.'], ['LOW-IMPACT', 'Produced with a fraction of the water of conventional cotton.'], ['WARDROBE STAPLE', 'Made to outlast trends, not the planet.']]
+}, {
+  key: 'ecolite',
+  label: 'ECOLITE™',
+  ribbon: 'LIGHT & LIVED-IN',
+  img: 'assets/fabric.jpg',
+  cells: [['LIGHTWEIGHT', 'Airy, fluid drape for warmer months.'], ['BREATHABLE', 'Open weave keeps the air moving.'], ['RECYCLED BLEND', 'Made from reclaimed plant fibers.'], ['LIVED-IN LOOK', 'A softer, relaxed aesthetic right out of the bag.']]
+}, {
+  key: 'sculptstretch',
+  label: 'SCULPTSTRETCH™',
+  ribbon: 'HOLD & RELEASE',
+  img: 'assets/fabric2.png',
+  cells: [['SUPPORTIVE STRETCH', 'Holds you in without holding you back.'], ['RECOVERY', 'Snaps back to shape, wear after wear.'], ['SMOOTH SILHOUETTE', 'A clean, sculpted line under everything.'], ['ALL-WAY FLEX', 'Designed for movement in every direction.']]
+}, {
+  key: 'texturerib',
+  label: 'TEXTURERIB™',
+  ribbon: 'RIBBED & READY',
+  img: 'assets/fabric.jpg',
+  cells: [['TEXTURED HAND', 'A tactile rib with dimensional depth.'], ['BODY-SKIMMING', 'Follows your shape without clinging.'], ['STRUCTURED STRETCH', 'Holds its form through the day.'], ['ENDLESSLY LAYERABLE', 'Pairs with everything in the wardrobe.']]
+}];
 function CloudSoftFabrics() {
   const [active, setActive] = useState(0);
   const f = CS_FABRICS[active];
-  return (
-    <section className="cs-fabrics" id="cs-fabrics-section">
-      <h2 className="cs-fab-title">OUR FABRICS</h2>
-      <div className="cs-fab-tabs">
-        {CS_FABRICS.map((ff, i) => (
-          <button key={ff.key} className={"cs-fab-tab " + (i===active?'active':'')} onClick={()=>setActive(i)}>
-            {ff.label}
-          </button>
-        ))}
-      </div>
-      <div className="cs-fab-grid">
-        <div className="cs-cell cs-cell-tl">
-          <h4>{f.cells[0][0]}</h4>
-          <p>{f.cells[0][1]}</p>
-        </div>
-        <div className="cs-cell cs-cell-tr">
-          <h4>{f.cells[2][0]}</h4>
-          <p>{f.cells[2][1]}</p>
-        </div>
-        <div className="cs-swatch-wrap" key={active}>
-          <div className="cs-swatch">
-            <div className="cs-swatch-inner">
-              <div className="cs-swatch-img" style={{backgroundImage:`url(${f.img})`}}/>
-              <div className="cs-swatch-ribbon">{f.ribbon}</div>
-            </div>
-          </div>
-        </div>
-        <div className="cs-cell cs-cell-bl">
-          <h4>{f.cells[1][0]}</h4>
-          <p>{f.cells[1][1]}</p>
-        </div>
-        <div className="cs-cell cs-cell-br">
-          <h4>{f.cells[3][0]}</h4>
-          <p>{f.cells[3][1]}</p>
-        </div>
-      </div>
-    </section>
-  );
+  return /*#__PURE__*/React.createElement("section", {
+    className: "cs-fabrics",
+    id: "cs-fabrics-section"
+  }, /*#__PURE__*/React.createElement("h2", {
+    className: "cs-fab-title"
+  }, "OUR FABRICS"), /*#__PURE__*/React.createElement("div", {
+    className: "cs-fab-tabs"
+  }, CS_FABRICS.map((ff, i) => /*#__PURE__*/React.createElement("button", {
+    key: ff.key,
+    className: "cs-fab-tab " + (i === active ? 'active' : ''),
+    onClick: () => setActive(i)
+  }, ff.label))), /*#__PURE__*/React.createElement("div", {
+    className: "cs-fab-grid"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "cs-cell cs-cell-tl"
+  }, /*#__PURE__*/React.createElement("h4", null, f.cells[0][0]), /*#__PURE__*/React.createElement("p", null, f.cells[0][1])), /*#__PURE__*/React.createElement("div", {
+    className: "cs-cell cs-cell-tr"
+  }, /*#__PURE__*/React.createElement("h4", null, f.cells[2][0]), /*#__PURE__*/React.createElement("p", null, f.cells[2][1])), /*#__PURE__*/React.createElement("div", {
+    className: "cs-swatch-wrap",
+    key: active
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "cs-swatch"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "cs-swatch-inner"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "cs-swatch-img",
+    style: {
+      backgroundImage: `url(${f.img})`
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "cs-swatch-ribbon"
+  }, f.ribbon)))), /*#__PURE__*/React.createElement("div", {
+    className: "cs-cell cs-cell-bl"
+  }, /*#__PURE__*/React.createElement("h4", null, f.cells[1][0]), /*#__PURE__*/React.createElement("p", null, f.cells[1][1])), /*#__PURE__*/React.createElement("div", {
+    className: "cs-cell cs-cell-br"
+  }, /*#__PURE__*/React.createElement("h4", null, f.cells[3][0]), /*#__PURE__*/React.createElement("p", null, f.cells[3][1]))));
 }
 
 /* ============================================================
    b2b.jsx (inlined)
    ============================================================ */
-function B2BPage({ navigate }) {
-  const products = [
-    { name: 'CO-ORD SETS', num: '01', img: 'assets/prod3.jpg' },
-    { name: 'HOODIES', num: '02', img: 'assets/prod1.png' },
-    { name: 'T-SHIRTS', num: '03', img: 'assets/prod2.png' },
-    { name: 'ACCESSORIES', num: '04', img: 'assets/prod4.jpg' },
-  ];
-  const caps = [
-    { t: 'Fabric selection', d: 'Choose from premium materials', i: 'fabric' },
-    { t: 'Design customization', d: 'Modify styles to your needs', i: 'design' },
-    { t: 'Logo branding', d: 'Multiple placement options', i: 'logo' },
-    { t: 'Sizing customization', d: 'Inclusive size ranges', i: 'size' },
-    { t: 'Premium packaging', d: 'Gift-ready presentation', i: 'gift' },
-  ];
-  const steps = [
-    { n: '01', t: 'Submit Inquiry', d: 'Share your vision, volumes & timelines with our team' },
-    { n: '02', t: 'Design & Sampling', d: 'Review prototypes and approve materials & fit' },
-    { n: '03', t: 'Production', d: 'Manufacturing begins with quality checks at every stage' },
-    { n: '04', t: 'Delivery', d: 'Receive your order on time, ready to distribute' },
-  ];
-  return (
-    <div>
-      <Nav page="b2b" navigate={navigate}/>
-      <section className="hero" style={{paddingTop:96}}>
-        <div className="b2b-hero-inner" style={{backgroundImage:`linear-gradient(rgba(39,9,3,0.55),rgba(39,9,3,0.55)), url(assets/b2bhero.jpg)`}}>
-          <h1>CORPORATE<br/>ORDERS</h1>
-          <p>Employee experience programs, gifting, and internal branding at scale.</p>
-        </div>
-      </section>
-
-      <section className="b2b-intro reveal">
-        <h2>We work with teams to create apparel and gifting that feels aligned with your brand. Designed to fit seamlessly into real work lives.</h2>
-      </section>
-
-      <section className="b2b-products">
-        <div className="section-head" style={{padding:'0 0 32px'}}>
-          <div><h2 style={{color:'var(--coffee)'}}>FOR YOUR TEAM</h2><span className="eyebrow" style={{color:'var(--warm-taupe)'}}>CATEGORIES</span></div>
-          <a href="#" className="btn-outline">View Catalog →</a>
-        </div>
-        <div className="b2b-product-grid">
-          {products.map((p,i) => (
-            <div key={i} className="b2b-prod-card reveal" style={{backgroundImage:`url(${p.img})`}}>
-              <span className="num">{p.num}</span>
-              <span className="label">{p.name}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="capabilities reveal">
-        <h2>Customization & Capabilities</h2>
-        <div className="cap-grid">
-          {caps.map((c, i) => (
-            <div key={i} className="cap-card">
-              <div className="icon">
-                <svg viewBox="0 0 44 44" width="44" height="44" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  {c.i==='fabric' && <><rect x="8" y="8" width="28" height="28" rx="2"/><path d="M8 16h28M8 24h28M8 32h28M16 8v28M24 8v28M32 8v28" opacity="0.4"/></>}
-                  {c.i==='design' && <><path d="M22 6l4 8 10 1-7 7 2 10-9-5-9 5 2-10-7-7 10-1z"/></>}
-                  {c.i==='logo' && <><circle cx="22" cy="22" r="14"/><path d="M8 22h28M22 8a20 20 0 0 1 0 28M22 8a20 20 0 0 0 0 28"/></>}
-                  {c.i==='size' && <><rect x="6" y="16" width="32" height="12" rx="1"/><path d="M12 16v6M18 16v6M24 16v6M30 16v6M15 16v4M21 16v4M27 16v4M33 16v4"/></>}
-                  {c.i==='gift' && <><rect x="8" y="16" width="28" height="22" rx="1"/><path d="M6 16h32M22 16v22M22 16s-6-8-10-4 10 4 10 4 6-8 10-4-10 4-10 4"/></>}
-                </svg>
-              </div>
-              <h4>{c.t}</h4><p>{c.d}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="how-it-works reveal">
-        <h2>HOW IT WORKS</h2>
-        <p>End-to-end support — from idea to execution.</p>
-        <div className="how-grid">
-          {steps.map((s,i) => (
-            <div key={i} className="how-step">
-              <div className="step-num">{s.n}</div>
-              <h5>{s.t}</h5><p>{s.d}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section className="manufacturing reveal">
-        <h2>Built on Proven Manufacturing</h2>
-        <p>Second Form is backed by our in-house manufacturing partner, Daiko Exports Pvt. Ltd. — a globally compliant garment unit with established international relationships.</p>
-        <div className="stats">
-          <div className="stat"><b>15+</b><span>Years of exports</span></div>
-          <div className="stat"><b>120k</b><span>Units monthly capacity</span></div>
-          <div className="stat"><b>12</b><span>Global certifications</span></div>
-        </div>
-      </section>
-
-      <section className="cta-band reveal">
-        <h2>Ready to start your order?</h2>
-        <p>Minimum order quantities start at 50 units. Let's talk.</p>
-        <div style={{display:'flex', gap:16, justifyContent:'center'}}>
-          <a href="#" className="btn btn-light">Submit Inquiry →</a>
-          <a href="#" onClick={(e)=>{e.preventDefault(); navigate('home')}} className="btn-outline on-dark" style={{alignSelf:'center'}}>Back to Shop</a>
-        </div>
-      </section>
-
-      <Footer/>
-    </div>
-  );
+function B2BPage({
+  navigate
+}) {
+  const products = [{
+    name: 'CO-ORD SETS',
+    num: '01',
+    img: 'assets/prod3.jpg'
+  }, {
+    name: 'HOODIES',
+    num: '02',
+    img: 'assets/prod1.png'
+  }, {
+    name: 'T-SHIRTS',
+    num: '03',
+    img: 'assets/prod2.png'
+  }, {
+    name: 'ACCESSORIES',
+    num: '04',
+    img: 'assets/prod4.jpg'
+  }];
+  const caps = [{
+    t: 'Fabric selection',
+    d: 'Choose from premium materials',
+    i: 'fabric'
+  }, {
+    t: 'Design customization',
+    d: 'Modify styles to your needs',
+    i: 'design'
+  }, {
+    t: 'Logo branding',
+    d: 'Multiple placement options',
+    i: 'logo'
+  }, {
+    t: 'Sizing customization',
+    d: 'Inclusive size ranges',
+    i: 'size'
+  }, {
+    t: 'Premium packaging',
+    d: 'Gift-ready presentation',
+    i: 'gift'
+  }];
+  const steps = [{
+    n: '01',
+    t: 'Submit Inquiry',
+    d: 'Share your vision, volumes & timelines with our team'
+  }, {
+    n: '02',
+    t: 'Design & Sampling',
+    d: 'Review prototypes and approve materials & fit'
+  }, {
+    n: '03',
+    t: 'Production',
+    d: 'Manufacturing begins with quality checks at every stage'
+  }, {
+    n: '04',
+    t: 'Delivery',
+    d: 'Receive your order on time, ready to distribute'
+  }];
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Nav, {
+    page: "b2b",
+    navigate: navigate
+  }), /*#__PURE__*/React.createElement("section", {
+    className: "hero",
+    style: {
+      paddingTop: 96
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "b2b-hero-inner",
+    style: {
+      backgroundImage: `linear-gradient(rgba(39,9,3,0.55),rgba(39,9,3,0.55)), url(assets/b2bhero.jpg)`
+    }
+  }, /*#__PURE__*/React.createElement("h1", null, "CORPORATE", /*#__PURE__*/React.createElement("br", null), "ORDERS"), /*#__PURE__*/React.createElement("p", null, "Employee experience programs, gifting, and internal branding at scale."))), /*#__PURE__*/React.createElement("section", {
+    className: "b2b-intro reveal"
+  }, /*#__PURE__*/React.createElement("h2", null, "We work with teams to create apparel and gifting that feels aligned with your brand. Designed to fit seamlessly into real work lives.")), /*#__PURE__*/React.createElement("section", {
+    className: "b2b-products"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-head",
+    style: {
+      padding: '0 0 32px'
+    }
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", {
+    style: {
+      color: 'var(--coffee)'
+    }
+  }, "FOR YOUR TEAM"), /*#__PURE__*/React.createElement("span", {
+    className: "eyebrow",
+    style: {
+      color: 'var(--warm-taupe)'
+    }
+  }, "CATEGORIES")), /*#__PURE__*/React.createElement("a", {
+    href: "#",
+    className: "btn-outline"
+  }, "View Catalog \u2192")), /*#__PURE__*/React.createElement("div", {
+    className: "b2b-product-grid"
+  }, products.map((p, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "b2b-prod-card reveal",
+    style: {
+      backgroundImage: `url(${p.img})`
+    }
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "num"
+  }, p.num), /*#__PURE__*/React.createElement("span", {
+    className: "label"
+  }, p.name))))), /*#__PURE__*/React.createElement("section", {
+    className: "capabilities reveal"
+  }, /*#__PURE__*/React.createElement("h2", null, "Customization & Capabilities"), /*#__PURE__*/React.createElement("div", {
+    className: "cap-grid"
+  }, caps.map((c, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "cap-card"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "icon"
+  }, /*#__PURE__*/React.createElement("svg", {
+    viewBox: "0 0 44 44",
+    width: "44",
+    height: "44",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: "1.5"
+  }, c.i === 'fabric' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("rect", {
+    x: "8",
+    y: "8",
+    width: "28",
+    height: "28",
+    rx: "2"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M8 16h28M8 24h28M8 32h28M16 8v28M24 8v28M32 8v28",
+    opacity: "0.4"
+  })), c.i === 'design' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("path", {
+    d: "M22 6l4 8 10 1-7 7 2 10-9-5-9 5 2-10-7-7 10-1z"
+  })), c.i === 'logo' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("circle", {
+    cx: "22",
+    cy: "22",
+    r: "14"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M8 22h28M22 8a20 20 0 0 1 0 28M22 8a20 20 0 0 0 0 28"
+  })), c.i === 'size' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("rect", {
+    x: "6",
+    y: "16",
+    width: "32",
+    height: "12",
+    rx: "1"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M12 16v6M18 16v6M24 16v6M30 16v6M15 16v4M21 16v4M27 16v4M33 16v4"
+  })), c.i === 'gift' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("rect", {
+    x: "8",
+    y: "16",
+    width: "28",
+    height: "22",
+    rx: "1"
+  }), /*#__PURE__*/React.createElement("path", {
+    d: "M6 16h32M22 16v22M22 16s-6-8-10-4 10 4 10 4 6-8 10-4-10 4-10 4"
+  })))), /*#__PURE__*/React.createElement("h4", null, c.t), /*#__PURE__*/React.createElement("p", null, c.d))))), /*#__PURE__*/React.createElement("section", {
+    className: "how-it-works reveal"
+  }, /*#__PURE__*/React.createElement("h2", null, "HOW IT WORKS"), /*#__PURE__*/React.createElement("p", null, "End-to-end support \u2014 from idea to execution."), /*#__PURE__*/React.createElement("div", {
+    className: "how-grid"
+  }, steps.map((s, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "how-step"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "step-num"
+  }, s.n), /*#__PURE__*/React.createElement("h5", null, s.t), /*#__PURE__*/React.createElement("p", null, s.d))))), /*#__PURE__*/React.createElement("section", {
+    className: "manufacturing reveal"
+  }, /*#__PURE__*/React.createElement("h2", null, "Built on Proven Manufacturing"), /*#__PURE__*/React.createElement("p", null, "Second Form is backed by our in-house manufacturing partner, Daiko Exports Pvt. Ltd. \u2014 a globally compliant garment unit with established international relationships."), /*#__PURE__*/React.createElement("div", {
+    className: "stats"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "stat"
+  }, /*#__PURE__*/React.createElement("b", null, "15+"), /*#__PURE__*/React.createElement("span", null, "Years of exports")), /*#__PURE__*/React.createElement("div", {
+    className: "stat"
+  }, /*#__PURE__*/React.createElement("b", null, "120k"), /*#__PURE__*/React.createElement("span", null, "Units monthly capacity")), /*#__PURE__*/React.createElement("div", {
+    className: "stat"
+  }, /*#__PURE__*/React.createElement("b", null, "12"), /*#__PURE__*/React.createElement("span", null, "Global certifications")))), /*#__PURE__*/React.createElement("section", {
+    className: "cta-band reveal"
+  }, /*#__PURE__*/React.createElement("h2", null, "Ready to start your order?"), /*#__PURE__*/React.createElement("p", null, "Minimum order quantities start at 50 units. Let's talk."), /*#__PURE__*/React.createElement("div", {
+    style: {
+      display: 'flex',
+      gap: 16,
+      justifyContent: 'center'
+    }
+  }, /*#__PURE__*/React.createElement("a", {
+    href: "#",
+    className: "btn btn-light"
+  }, "Submit Inquiry \u2192"), /*#__PURE__*/React.createElement("a", {
+    href: "#",
+    onClick: e => {
+      e.preventDefault();
+      navigate('home');
+    },
+    className: "btn-outline on-dark",
+    style: {
+      alignSelf: 'center'
+    }
+  }, "Back to Shop"))), /*#__PURE__*/React.createElement(Footer, null));
 }
-
 function Footer() {
-  return (
-    <footer>
-      <div className="foot-cols">
-        <div><h4>Products</h4><ul><li><a href="#">T-shirts</a></li><li><a href="#">Co-ord Sets</a></li><li><a href="#">Hoodies</a></li><li><a href="#">Accessories</a></li></ul></div>
-        <div><h4>Bottoms</h4><ul><li><a href="#">Pants</a></li><li><a href="#">Tank Tops</a></li><li><a href="#">Corporate</a></li></ul></div>
-        <div><h4>Company</h4><ul><li><a href="#">About</a></li><li><a href="#">Our Process</a></li><li><a href="#">Certifications</a></li><li><a href="#">Contact</a></li></ul></div>
-        <div><h4>Legal</h4><ul><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Shipping Policy</a></li></ul></div>
-      </div>
-      <div className="foot-bottom">
-        <span>© 2026 Second Form. All rights reserved.</span>
-        <span className="it">Built on the foundation of export-grade manufacturing, designed for modern teams.</span>
-      </div>
-    </footer>
-  );
+  return /*#__PURE__*/React.createElement("footer", null, /*#__PURE__*/React.createElement("div", {
+    className: "foot-cols"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Products"), /*#__PURE__*/React.createElement("ul", null, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
+    href: "#"
+  }, "T-shirts")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
+    href: "#"
+  }, "Co-ord Sets")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
+    href: "#"
+  }, "Hoodies")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
+    href: "#"
+  }, "Accessories")))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Bottoms"), /*#__PURE__*/React.createElement("ul", null, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
+    href: "#"
+  }, "Pants")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
+    href: "#"
+  }, "Tank Tops")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
+    href: "#"
+  }, "Corporate")))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Company"), /*#__PURE__*/React.createElement("ul", null, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
+    href: "#"
+  }, "About")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
+    href: "#"
+  }, "Our Process")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
+    href: "#"
+  }, "Certifications")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
+    href: "#"
+  }, "Contact")))), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h4", null, "Legal"), /*#__PURE__*/React.createElement("ul", null, /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
+    href: "#"
+  }, "Privacy Policy")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
+    href: "#"
+  }, "Terms of Service")), /*#__PURE__*/React.createElement("li", null, /*#__PURE__*/React.createElement("a", {
+    href: "#"
+  }, "Shipping Policy"))))), /*#__PURE__*/React.createElement("div", {
+    className: "foot-bottom"
+  }, /*#__PURE__*/React.createElement("span", null, "\xA9 2026 Second Form. All rights reserved."), /*#__PURE__*/React.createElement("span", {
+    className: "it"
+  }, "Built on the foundation of export-grade manufacturing, designed for modern teams.")));
 }
 
 /* ============================================================
@@ -522,173 +912,282 @@ function ScrollVectors() {
   const [scrollY, setScrollY] = useState(0);
   useEffect(() => {
     const h = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', h, { passive: true });
+    window.addEventListener('scroll', h, {
+      passive: true
+    });
     return () => window.removeEventListener('scroll', h);
   }, []);
   // The vectors sit flanking the lounge phrase. Rotate them on scroll — one cw, one ccw.
   const rot = scrollY * 0.22;
-  return (
-    <>
-      {/* Left-side squiggly ring — warm taupe, anticlockwise */}
-      <div style={{ position: 'absolute', top: '-68px', left: '40px', width: 160, height: 80, pointerEvents: 'none',
-        transform: `rotate(${-rot}deg)`, transformOrigin: '50% 50%', willChange: 'transform', opacity: 1,
-        background: 'var(--warm-taupe)',
-        WebkitMask: 'url(assets/Logo.svg) center / contain no-repeat',
-        mask: 'url(assets/Logo.svg) center / contain no-repeat' }} />
-      {/* Right-side squiggly ring — chocolate, clockwise */}
-      <div style={{ position: 'absolute', bottom: '-40px', right: '5%', width: 210, height: 130, pointerEvents: 'none',
-        transform: `rotate(${rot}deg)`, transformOrigin: '50% 50%', willChange: 'transform', opacity: 0.6,
-        background: 'var(--chocolate)',
-        WebkitMask: 'url(assets/Logo-striped.svg) center / contain no-repeat',
-        mask: 'url(assets/Logo-striped.svg) center / contain no-repeat' }} />
-    </>);
-
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      top: '-68px',
+      left: '40px',
+      width: 160,
+      height: 80,
+      pointerEvents: 'none',
+      transform: `rotate(${-rot}deg)`,
+      transformOrigin: '50% 50%',
+      willChange: 'transform',
+      opacity: 1,
+      background: 'var(--warm-taupe)',
+      WebkitMask: 'url(assets/Logo.svg) center / contain no-repeat',
+      mask: 'url(assets/Logo.svg) center / contain no-repeat'
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'absolute',
+      bottom: '-40px',
+      right: '5%',
+      width: 210,
+      height: 130,
+      pointerEvents: 'none',
+      transform: `rotate(${rot}deg)`,
+      transformOrigin: '50% 50%',
+      willChange: 'transform',
+      opacity: 0.6,
+      background: 'var(--chocolate)',
+      WebkitMask: 'url(assets/Logo-striped.svg) center / contain no-repeat',
+      mask: 'url(assets/Logo-striped.svg) center / contain no-repeat'
+    }
+  }));
 }
-
-function HomePage({ navigate }) {
-  return (
-    <div>
-      <Nav page="home" navigate={navigate} />
-
-      {/* HERO */}
-      <section className="hero">
-        <div className="hero-inner" style={{ backgroundImage: 'url(assets/hero.png)' }}>
-          <div className="hero-content">
-            <h1>MADE FOR SLOW<br />MORNINGS, LONG DAYS,<br />AND EVERYTHING IN<br />BETWEEN.</h1>
-            <p className="tagline">Fashion that moves with you</p>
-            <a href="#" className="btn">Explore Now →</a>
-          </div>
-        </div>
-      </section>
-
-      {/* NEW IN */}
-      <section className="products">
-        <div className="section-head">
-          <div>
-            <h2>NEW IN</h2>
-            <span className="eyebrow">The Essentials</span>
-          </div>
-          <a href="#" className="btn-outline">View All</a>
-        </div>
-        <div className="product-grid">
-          <ProductCard img="assets/prod1.png" name="ESSENTIAL TEE" sub="Oatmeal / Jersey" price="RS 2,000" />
-          <ProductCard img="assets/prod2.png" name="CROPPED RIB" sub="Ecru / Jersey" price="RS 2,400" />
-          <ProductCard img="assets/prod3.jpg" name="KNITTED PANTS" sub="Sand / Terry" price="RS 3,250" />
-          <ProductCard img="assets/prod4.jpg" name="LOUNGE SET" sub="Stone / Modal" price="RS 4,500" />
-        </div>
-      </section>
-
-      {/* SHOP THE LOOK */}
-      <section style={{ padding: '24px 0' }}>
-        <div className="shop-the-look" style={{ backgroundImage: 'url(assets/shopthelook.png)' }}>
-          <div className="stl-head">
-            <h2>SHOP THE LOOK</h2>
-            <span className="eyebrow" style={{ color: 'var(--bone-2)' }}>our faves, for you</span>
-          </div>
-          <div className="stl-pin" style={{ left: '42%', top: '66%' }}>
-            <div className="stl-dot" />
-            <div className="stl-tag stl-tag--left">
-              <div className="sw" style={{ backgroundImage: 'url(assets/pants.png)' }} />
-              <div><div className="nm">Knitted Pants</div><div className="pr">Rs 3,250</div></div>
-            </div>
-          </div>
-          <div className="stl-pin" style={{ left: '58%', top: '46%' }}>
-            <div className="stl-dot" />
-            <div className="stl-tag stl-tag--right">
-              <div className="sw" style={{ backgroundImage: 'url(assets/top.png)' }} />
-              <div><div className="nm">Knitted Top</div><div className="pr">Rs 3,250</div></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* LOUNGE PHRASE - scroll color + rotating vectors */}
-      <div style={{ position: 'relative' }}>
-        <ScrollVectors />
-        <LoungePhrase />
-      </div>
-
-      {/* SHOP BY CATEGORY */}
-      <section className="category-section">
-        <div className="section-head on-dark">
-          <div><h2>SHOP BY CATEGORY</h2><span className="eyebrow">we've got it all</span></div>
-          <a href="#" className="btn-outline on-dark">View All</a>
-        </div>
-        <div className="category-grid">
-          <div className="cat-card reveal"><img src="assets/prod4.jpg" alt="" /><span className="cat-num">01</span><span className="cat-label">LOUNGING AT HOME</span></div>
-          <div className="cat-card reveal"><img src="assets/prod3.jpg" alt="" /><span className="cat-num">02</span><span className="cat-label">TRAVEL EDIT</span></div>
-          <div className="cat-card reveal"><img src="assets/prod2.png" alt="" /><span className="cat-num">03</span><span className="cat-label">DAILY ESSENTIALS</span></div>
-          <div className="cat-card reveal"><img src="assets/prod1.png" alt="" /><span className="cat-num">04</span><span className="cat-label">DESK TO DINNER</span></div>
-        </div>
-      </section>
-
-      {/* THERE'S SOMETHING FOR EVERYONE */}
-      <section className="everyone-section">
-        <div className="everyone-inner" style={{ backgroundImage: 'url(assets/everyone.png)' }}>
-          <div>
-            <h2>THERE'S SOMETHING<br />FOR EVERYONE</h2>
-            <p>FIND YOUR SECOND SKIN</p>
-            <div className="btns">
-              <a href="#" className="btn">Shop Women</a>
-              <a href="#" className="btn">Shop Men</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* FABRICS (interactive) */}
-      <Fabrics />
-
-      {/* FABRICS — branded CloudSoft variant (centered swatch + 4 callouts) */}
-      <CloudSoftFabrics />
-
-      {/* MOST LOVED */}
-      <section className="products">
-        <div className="section-head">
-          <div><h2>MOST LOVED</h2><span className="eyebrow">your favs</span></div>
-          <a href="#" className="btn-outline">View All</a>
-        </div>
-        <div className="product-grid">
-          <ProductCard img="assets/prod4.jpg" name="LOUNGE SET" sub="Stone / Modal" price="RS 4,500" />
-          <ProductCard img="assets/prod2.png" name="CROPPED RIB" sub="Ecru / Jersey" price="RS 2,400" />
-          <ProductCard img="assets/prod1.png" name="ESSENTIAL TEE" sub="Oatmeal / Jersey" price="RS 2,000" />
-          <ProductCard img="assets/prod3.jpg" name="KNITTED PANTS" sub="Sand / Terry" price="RS 3,250" />
-        </div>
-      </section>
-
-      {/* TESTIMONIALS (interactive) */}
-      <Testimonials />
-
-      {/* FAQ */}
-      <section className="faq-section">
-        <h2>FREQUENTLY ASKED QUESTIONS</h2>
-        <FAQ />
-      </section>
-
-      <Footer />
-    </div>);
-
+function HomePage({
+  navigate
+}) {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Nav, {
+    page: "home",
+    navigate: navigate
+  }), /*#__PURE__*/React.createElement("section", {
+    className: "hero"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "hero-inner",
+    style: {
+      backgroundImage: 'url(assets/hero.png)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "hero-content"
+  }, /*#__PURE__*/React.createElement("h1", null, "MADE FOR SLOW", /*#__PURE__*/React.createElement("br", null), "MORNINGS, LONG DAYS,", /*#__PURE__*/React.createElement("br", null), "AND EVERYTHING IN", /*#__PURE__*/React.createElement("br", null), "BETWEEN."), /*#__PURE__*/React.createElement("p", {
+    className: "tagline"
+  }, "Fashion that moves with you"), /*#__PURE__*/React.createElement("a", {
+    href: "#",
+    className: "btn"
+  }, "Explore Now \u2192")))), /*#__PURE__*/React.createElement("section", {
+    className: "products"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-head"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", null, "NEW IN"), /*#__PURE__*/React.createElement("span", {
+    className: "eyebrow"
+  }, "The Essentials")), /*#__PURE__*/React.createElement("a", {
+    href: "#",
+    className: "btn-outline"
+  }, "View All")), /*#__PURE__*/React.createElement("div", {
+    className: "product-grid"
+  }, /*#__PURE__*/React.createElement(ProductCard, {
+    img: "assets/prod1.png",
+    name: "ESSENTIAL TEE",
+    sub: "Oatmeal / Jersey",
+    price: "RS 2,000"
+  }), /*#__PURE__*/React.createElement(ProductCard, {
+    img: "assets/prod2.png",
+    name: "CROPPED RIB",
+    sub: "Ecru / Jersey",
+    price: "RS 2,400"
+  }), /*#__PURE__*/React.createElement(ProductCard, {
+    img: "assets/prod3.jpg",
+    name: "KNITTED PANTS",
+    sub: "Sand / Terry",
+    price: "RS 3,250"
+  }), /*#__PURE__*/React.createElement(ProductCard, {
+    img: "assets/prod4.jpg",
+    name: "LOUNGE SET",
+    sub: "Stone / Modal",
+    price: "RS 4,500"
+  }))), /*#__PURE__*/React.createElement("section", {
+    style: {
+      padding: '24px 0'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "shop-the-look",
+    style: {
+      backgroundImage: 'url(assets/shopthelook.png)'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "stl-head"
+  }, /*#__PURE__*/React.createElement("h2", null, "SHOP THE LOOK"), /*#__PURE__*/React.createElement("span", {
+    className: "eyebrow",
+    style: {
+      color: 'var(--bone-2)'
+    }
+  }, "our faves, for you")), /*#__PURE__*/React.createElement("div", {
+    className: "stl-pin",
+    style: {
+      left: '42%',
+      top: '66%'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "stl-dot"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "stl-tag stl-tag--left"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sw",
+    style: {
+      backgroundImage: 'url(assets/pants.png)'
+    }
+  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "nm"
+  }, "Knitted Pants"), /*#__PURE__*/React.createElement("div", {
+    className: "pr"
+  }, "Rs 3,250")))), /*#__PURE__*/React.createElement("div", {
+    className: "stl-pin",
+    style: {
+      left: '58%',
+      top: '46%'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "stl-dot"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "stl-tag stl-tag--right"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "sw",
+    style: {
+      backgroundImage: 'url(assets/top.png)'
+    }
+  }), /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    className: "nm"
+  }, "Knitted Top"), /*#__PURE__*/React.createElement("div", {
+    className: "pr"
+  }, "Rs 3,250")))))), /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'relative'
+    }
+  }, /*#__PURE__*/React.createElement(ScrollVectors, null), /*#__PURE__*/React.createElement(LoungePhrase, null)), /*#__PURE__*/React.createElement("section", {
+    className: "category-section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-head on-dark"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", null, "SHOP BY CATEGORY"), /*#__PURE__*/React.createElement("span", {
+    className: "eyebrow"
+  }, "we've got it all")), /*#__PURE__*/React.createElement("a", {
+    href: "#",
+    className: "btn-outline on-dark"
+  }, "View All")), /*#__PURE__*/React.createElement("div", {
+    className: "category-grid"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "cat-card reveal"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "assets/prod4.jpg",
+    alt: ""
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "cat-num"
+  }, "01"), /*#__PURE__*/React.createElement("span", {
+    className: "cat-label"
+  }, "LOUNGING AT HOME")), /*#__PURE__*/React.createElement("div", {
+    className: "cat-card reveal"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "assets/prod3.jpg",
+    alt: ""
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "cat-num"
+  }, "02"), /*#__PURE__*/React.createElement("span", {
+    className: "cat-label"
+  }, "TRAVEL EDIT")), /*#__PURE__*/React.createElement("div", {
+    className: "cat-card reveal"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "assets/prod2.png",
+    alt: ""
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "cat-num"
+  }, "03"), /*#__PURE__*/React.createElement("span", {
+    className: "cat-label"
+  }, "DAILY ESSENTIALS")), /*#__PURE__*/React.createElement("div", {
+    className: "cat-card reveal"
+  }, /*#__PURE__*/React.createElement("img", {
+    src: "assets/prod1.png",
+    alt: ""
+  }), /*#__PURE__*/React.createElement("span", {
+    className: "cat-num"
+  }, "04"), /*#__PURE__*/React.createElement("span", {
+    className: "cat-label"
+  }, "DESK TO DINNER")))), /*#__PURE__*/React.createElement("section", {
+    className: "everyone-section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "everyone-inner",
+    style: {
+      backgroundImage: 'url(assets/everyone.png)'
+    }
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", null, "THERE'S SOMETHING", /*#__PURE__*/React.createElement("br", null), "FOR EVERYONE"), /*#__PURE__*/React.createElement("p", null, "FIND YOUR SECOND SKIN"), /*#__PURE__*/React.createElement("div", {
+    className: "btns"
+  }, /*#__PURE__*/React.createElement("a", {
+    href: "#",
+    className: "btn"
+  }, "Shop Women"), /*#__PURE__*/React.createElement("a", {
+    href: "#",
+    className: "btn"
+  }, "Shop Men"))))), /*#__PURE__*/React.createElement(Fabrics, null), /*#__PURE__*/React.createElement(CloudSoftFabrics, null), /*#__PURE__*/React.createElement("section", {
+    className: "products"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "section-head"
+  }, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h2", null, "MOST LOVED"), /*#__PURE__*/React.createElement("span", {
+    className: "eyebrow"
+  }, "your favs")), /*#__PURE__*/React.createElement("a", {
+    href: "#",
+    className: "btn-outline"
+  }, "View All")), /*#__PURE__*/React.createElement("div", {
+    className: "product-grid"
+  }, /*#__PURE__*/React.createElement(ProductCard, {
+    img: "assets/prod4.jpg",
+    name: "LOUNGE SET",
+    sub: "Stone / Modal",
+    price: "RS 4,500"
+  }), /*#__PURE__*/React.createElement(ProductCard, {
+    img: "assets/prod2.png",
+    name: "CROPPED RIB",
+    sub: "Ecru / Jersey",
+    price: "RS 2,400"
+  }), /*#__PURE__*/React.createElement(ProductCard, {
+    img: "assets/prod1.png",
+    name: "ESSENTIAL TEE",
+    sub: "Oatmeal / Jersey",
+    price: "RS 2,000"
+  }), /*#__PURE__*/React.createElement(ProductCard, {
+    img: "assets/prod3.jpg",
+    name: "KNITTED PANTS",
+    sub: "Sand / Terry",
+    price: "RS 3,250"
+  }))), /*#__PURE__*/React.createElement(Testimonials, null), /*#__PURE__*/React.createElement("section", {
+    className: "faq-section"
+  }, /*#__PURE__*/React.createElement("h2", null, "FREQUENTLY ASKED QUESTIONS"), /*#__PURE__*/React.createElement(FAQ, null)), /*#__PURE__*/React.createElement(Footer, null));
 }
-
 function FAQ() {
   const [open, setOpen] = useState(0);
-  const items = [
-  { q: 'What is your fabric sourcing philosophy?', a: 'We source long-staple cottons and botanical-origin fibres certified under GOTS and Oeko-Tex 100. Every roll is traced back to the mill.' },
-  { q: 'How does sizing work?', a: 'Our fit is relaxed but not oversized. If you\'re between sizes, go up for lounge and down for hybrid silhouettes.' },
-  { q: 'What is the return policy?', a: 'Free returns within 15 days of delivery, on unworn pieces with tags intact.' },
-  { q: 'Do you ship internationally?', a: 'Yes — we ship worldwide. Duties and taxes are calculated at checkout.' },
-  { q: 'How should I care for my Second Form pieces?', a: 'Cold machine wash inside-out on gentle cycle, line dry. Our fabrics soften beautifully with every wash.' }];
-
-  return (
-    <>
-      {items.map((it, i) =>
-      <div key={i} className={"faq-item " + (i === open ? 'open' : '')} onClick={() => setOpen(open === i ? -1 : i)}>
-          <div className="faq-q"><span>{it.q}</span><span className="plus">+</span></div>
-          <div className="faq-a">{it.a}</div>
-        </div>
-      )}
-    </>);
-
+  const items = [{
+    q: 'What is your fabric sourcing philosophy?',
+    a: 'We source long-staple cottons and botanical-origin fibres certified under GOTS and Oeko-Tex 100. Every roll is traced back to the mill.'
+  }, {
+    q: 'How does sizing work?',
+    a: 'Our fit is relaxed but not oversized. If you\'re between sizes, go up for lounge and down for hybrid silhouettes.'
+  }, {
+    q: 'What is the return policy?',
+    a: 'Free returns within 15 days of delivery, on unworn pieces with tags intact.'
+  }, {
+    q: 'Do you ship internationally?',
+    a: 'Yes — we ship worldwide. Duties and taxes are calculated at checkout.'
+  }, {
+    q: 'How should I care for my Second Form pieces?',
+    a: 'Cold machine wash inside-out on gentle cycle, line dry. Our fabrics soften beautifully with every wash.'
+  }];
+  return /*#__PURE__*/React.createElement(React.Fragment, null, items.map((it, i) => /*#__PURE__*/React.createElement("div", {
+    key: i,
+    className: "faq-item " + (i === open ? 'open' : ''),
+    onClick: () => setOpen(open === i ? -1 : i)
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "faq-q"
+  }, /*#__PURE__*/React.createElement("span", null, it.q), /*#__PURE__*/React.createElement("span", {
+    className: "plus"
+  }, "+")), /*#__PURE__*/React.createElement("div", {
+    className: "faq-a"
+  }, it.a))));
 }
 
 // ========== TWEAKS ==========
@@ -696,13 +1195,15 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "loungePhraseUppercase": true,
   "everyoneSectionHeight": 600,
   "accentOnSwirl": true
-}/*EDITMODE-END*/;
-window.__tweaks = { ...TWEAK_DEFAULTS };
-
+} /*EDITMODE-END*/;
+window.__tweaks = {
+  ...TWEAK_DEFAULTS
+};
 function TweaksPanel() {
   const [on, setOn] = useState(false);
-  const [state, setState] = useState({ ...window.__tweaks });
-
+  const [state, setState] = useState({
+    ...window.__tweaks
+  });
   useEffect(() => {
     function handler(e) {
       if (!e.data) return;
@@ -710,50 +1211,103 @@ function TweaksPanel() {
       if (e.data.type === '__deactivate_edit_mode') setOn(false);
     }
     window.addEventListener('message', handler);
-    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    window.parent.postMessage({
+      type: '__edit_mode_available'
+    }, '*');
     return () => window.removeEventListener('message', handler);
   }, []);
-
   function update(patch) {
-    const next = { ...state, ...patch };
+    const next = {
+      ...state,
+      ...patch
+    };
     setState(next);
     window.__tweaks = next;
     // trigger re-render of consumers + apply DOM side effects
     window.dispatchEvent(new Event('tweaks-changed'));
-    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: patch }, '*');
+    window.parent.postMessage({
+      type: '__edit_mode_set_keys',
+      edits: patch
+    }, '*');
   }
-
   if (!on) return null;
-  return (
-    <div style={{
-      position:'fixed', right:20, bottom:20, zIndex:9999,
-      background:'#fff', border:'1px solid #E7E5E4', borderRadius:8,
-      padding:'18px 20px', width:280, fontFamily:'Funnel Sans, sans-serif',
-      boxShadow:'0 12px 40px rgba(0,0,0,0.14)', color:'#332925'
-    }}>
-      <div style={{fontFamily:'Funnel Display, serif', fontWeight:700, fontSize:16, marginBottom:14, letterSpacing:'-0.01em'}}>Tweaks</div>
-
-      <label style={{display:'flex',alignItems:'center',justifyContent:'space-between',fontSize:13,marginBottom:14,cursor:'pointer'}}>
-        <span>Uppercase lounge phrase</span>
-        <input type="checkbox" checked={!!state.loungePhraseUppercase} onChange={e=>update({loungePhraseUppercase:e.target.checked})}/>
-      </label>
-
-      <label style={{display:'flex',flexDirection:'column',fontSize:13,marginBottom:14,gap:6}}>
-        <span>"Everyone" section height: <b>{state.everyoneSectionHeight}px</b></span>
-        <input type="range" min="349" max="800" step="1" value={state.everyoneSectionHeight}
-               onChange={e=>update({everyoneSectionHeight: parseInt(e.target.value, 10)})}/>
-      </label>
-
-      <label style={{display:'flex',alignItems:'center',justifyContent:'space-between',fontSize:13,marginBottom:0,cursor:'pointer'}}>
-        <span>Tint logo swirl chocolate</span>
-        <input type="checkbox" checked={!!state.accentOnSwirl} onChange={e=>update({accentOnSwirl:e.target.checked})}/>
-      </label>
-    </div>
-  );
+  return /*#__PURE__*/React.createElement("div", {
+    style: {
+      position: 'fixed',
+      right: 20,
+      bottom: 20,
+      zIndex: 9999,
+      background: '#fff',
+      border: '1px solid #E7E5E4',
+      borderRadius: 8,
+      padding: '18px 20px',
+      width: 280,
+      fontFamily: 'Funnel Sans, sans-serif',
+      boxShadow: '0 12px 40px rgba(0,0,0,0.14)',
+      color: '#332925'
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    style: {
+      fontFamily: 'Funnel Display, serif',
+      fontWeight: 700,
+      fontSize: 16,
+      marginBottom: 14,
+      letterSpacing: '-0.01em'
+    }
+  }, "Tweaks"), /*#__PURE__*/React.createElement("label", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      fontSize: 13,
+      marginBottom: 14,
+      cursor: 'pointer'
+    }
+  }, /*#__PURE__*/React.createElement("span", null, "Uppercase lounge phrase"), /*#__PURE__*/React.createElement("input", {
+    type: "checkbox",
+    checked: !!state.loungePhraseUppercase,
+    onChange: e => update({
+      loungePhraseUppercase: e.target.checked
+    })
+  })), /*#__PURE__*/React.createElement("label", {
+    style: {
+      display: 'flex',
+      flexDirection: 'column',
+      fontSize: 13,
+      marginBottom: 14,
+      gap: 6
+    }
+  }, /*#__PURE__*/React.createElement("span", null, "\"Everyone\" section height: ", /*#__PURE__*/React.createElement("b", null, state.everyoneSectionHeight, "px")), /*#__PURE__*/React.createElement("input", {
+    type: "range",
+    min: "349",
+    max: "800",
+    step: "1",
+    value: state.everyoneSectionHeight,
+    onChange: e => update({
+      everyoneSectionHeight: parseInt(e.target.value, 10)
+    })
+  })), /*#__PURE__*/React.createElement("label", {
+    style: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      fontSize: 13,
+      marginBottom: 0,
+      cursor: 'pointer'
+    }
+  }, /*#__PURE__*/React.createElement("span", null, "Tint logo swirl chocolate"), /*#__PURE__*/React.createElement("input", {
+    type: "checkbox",
+    checked: !!state.accentOnSwirl,
+    onChange: e => update({
+      accentOnSwirl: e.target.checked
+    })
+  })));
 }
 
 // Small consumer that re-renders when tweaks change, to drive live updates
-function TweakObserver({ children }) {
+function TweakObserver({
+  children
+}) {
   const [, force] = useState(0);
   useEffect(() => {
     const h = () => force(x => x + 1);
@@ -776,24 +1330,28 @@ window.addEventListener('tweaks-changed', applyTweakSideEffects);
 function App() {
   const [page, setPage] = useState(() => localStorage.getItem('sf_page') || 'home');
   const [, force] = useState(0);
-  const navigate = (p) => {
+  const navigate = p => {
     setPage(p);
     localStorage.setItem('sf_page', p);
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    window.scrollTo({
+      top: 0,
+      behavior: 'instant'
+    });
   };
   useEffect(() => {
     // reveal on scroll
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
         if (e.isIntersecting) e.target.classList.add('in');
       });
-    }, { threshold: 0.1 });
+    }, {
+      threshold: 0.1
+    });
     setTimeout(() => {
-      document.querySelectorAll('.reveal').forEach((el) => obs.observe(el));
+      document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
     }, 50);
     return () => obs.disconnect();
   }, [page]);
-
   useEffect(() => {
     // apply side effects on initial render
     applyTweakSideEffects();
@@ -801,16 +1359,13 @@ function App() {
     window.addEventListener('tweaks-changed', h);
     return () => window.removeEventListener('tweaks-changed', h);
   }, []);
-
-  return (
-    <>
-      {page === 'b2b' ? <B2BPage navigate={navigate} /> : <HomePage navigate={navigate} />}
-      <TweaksPanel/>
-    </>
-  );
+  return /*#__PURE__*/React.createElement(React.Fragment, null, page === 'b2b' ? /*#__PURE__*/React.createElement(B2BPage, {
+    navigate: navigate
+  }) : /*#__PURE__*/React.createElement(HomePage, {
+    navigate: navigate
+  }), /*#__PURE__*/React.createElement(TweaksPanel, null));
 }
-
-ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+ReactDOM.createRoot(document.getElementById('root')).render(/*#__PURE__*/React.createElement(App, null));
 </script>
 </body>
 </html>
