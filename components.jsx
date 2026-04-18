@@ -53,6 +53,7 @@ function Nav({ page, navigate }) {
   return (
     <>
       <div className="nav">
+        <button className="nav-hamburger" aria-label="open menu" onClick={() => setMenuOpen(true)}><IconMenu/></button>
         <a href="#" className="logo" onClick={e=>{e.preventDefault(); navigate('home')}} aria-label="second form">
           <BrandLogo/>
         </a>
@@ -68,7 +69,6 @@ function Nav({ page, navigate }) {
         <div className="nav-icons">
           <button aria-label="search"><IconSearch/></button>
           <button aria-label="bag" style={{position:'relative'}}><IconBag/><span style={{position:'absolute',top:2,right:2,width:14,height:14,borderRadius:'50%',background:'var(--chocolate)',color:'#fff',fontSize:9,display:'flex',alignItems:'center',justifyContent:'center',fontFamily:'Funnel Sans'}}>2</span></button>
-          <button className="nav-hamburger" aria-label="open menu" onClick={() => setMenuOpen(true)}><IconMenu/></button>
         </div>
       </div>
 
