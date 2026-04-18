@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Second Form — Fashion that moves with you</title>
+<link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;700;800&family=Funnel+Sans:wght@300;400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=4"/>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="components.jsx"></script>
+<script type="text/babel" src="interactive.jsx"></script>
+<script type="text/babel" src="b2b.jsx"></script>
+
+<script type="text/babel">
+
+const { useState, useEffect, useRef } = React;
+
+// Rotating deco vectors that rotate on scroll — using the real Figma squiggly ring shapes
+function ScrollVectors() {
+  const [scrollY, setScrollY] = useState(0);
+  useEffect(() => {
+    const h = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', h, { passive: true });
+    return () => window.removeEventListener('scroll', h);
+  }, []);
+  // The vectors sit flanking the lounge phrase. Rotate them on scroll — one cw, one ccw.
+  const rot = scrollY * 0.22;
+  return (
+    <>
+      {/* Left-side squiggly ring — warm taupe, anticlockwise */}
+      <div style={{ position: 'absolute', top: '-68px', left: '40px', width: 160, height: 80, pointerEvents: 'none',
+        transform: `rotate(${-rot}deg)`, transformOrigin: '50% 50%', willChange: 'transform', opacity: 1,
+        background: 'var(--warm-taupe)',
+        WebkitMask: 'url(assets/Logo.svg) center / contain no-repeat',
+        mask: 'url(assets/Logo.svg) center / contain no-repeat' }} />
+      {/* Right-side squiggly ring — chocolate, clockwise */}
+      <div style={{ position: 'absolute', bottom: '-40px', right: '5%', width: 210, height: 130, pointerEvents: 'none',
+        transform: `rotate(${rot}deg)`, transformOrigin: '50% 50%', willChange: 'transform', opacity: 0.6,
+        background: 'var(--chocolate)',
+        WebkitMask: 'url(assets/Logo-striped.svg) center / contain no-repeat',
+        mask: 'url(assets/Logo-striped.svg) center / contain no-repeat' }} />
+    </>);
+
+}
+
+function HomePage({ navigate }) {
+  return (
+    <div>
+      <Nav page="home" navigate={navigate} />
+
+      {/* HERO */}
+      <section className="hero">
+        <div className="hero-inner" style={{ backgroundImage: 'url(assets/hero.png)' }}>
+          <div className="hero-content">
+            <h1>MADE FOR SLOW<br />MORNINGS, LONG DAYS,<br />AND EVERYTHING IN<br />BETWEEN.</h1>
+            <p className="tagline">Fashion that moves with you</p>
+            <a href="#" className="btn">Explore Now →</a>
+          </div>
+        </div>
+      </section>
+
+      {/* NEW IN */}
+      <section className="products">
+        <div className="section-head">
+          <div>
+            <h2>NEW IN</h2>
+            <span className="eyebrow">The Essentials</span>
+          </div>
+          <a href="#" className="btn-outline">View All</a>
+        </div>
+        <div className="product-grid">
+          <ProductCard img="assets/prod1.png" name="ESSENTIAL TEE" sub="Oatmeal / Jersey" price="RS 2,000" />
+          <ProductCard img="assets/prod2.png" name="CROPPED RIB" sub="Ecru / Jersey" price="RS 2,400" />
+          <ProductCard img="assets/prod3.jpg" name="KNITTED PANTS" sub="Sand / Terry" price="RS 3,250" />
+          <ProductCard img="assets/prod4.jpg" name="LOUNGE SET" sub="Stone / Modal" price="RS 4,500" />
+        </div>
+      </section>
+
+      {/* SHOP THE LOOK */}
+      <section style={{ padding: '24px 0' }}>
+        <div className="shop-the-look" style={{ backgroundImage: 'url(assets/shopthelook.png)' }}>
+          <div className="stl-head">
+            <h2>SHOP THE LOOK</h2>
+            <span className="eyebrow" style={{ color: 'var(--bone-2)' }}>our faves, for you</span>
+          </div>
+          <div className="stl-pin" style={{ left: '42%', top: '66%' }}>
+            <div className="stl-dot" />
+            <div className="stl-tag stl-tag--left">
+              <div className="sw" style={{ backgroundImage: 'url(assets/pants.png)' }} />
+              <div><div className="nm">Knitted Pants</div><div className="pr">Rs 3,250</div></div>
+            </div>
+          </div>
+          <div className="stl-pin" style={{ left: '58%', top: '46%' }}>
+            <div className="stl-dot" />
+            <div className="stl-tag stl-tag--right">
+              <div className="sw" style={{ backgroundImage: 'url(assets/top.png)' }} />
+              <div><div className="nm">Knitted Top</div><div className="pr">Rs 3,250</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* LOUNGE PHRASE - scroll color + rotating vectors */}
+      <div style={{ position: 'relative' }}>
+        <ScrollVectors />
+        <LoungePhrase />
+      </div>
+
+      {/* SHOP BY CATEGORY */}
+      <section className="category-section">
+        <div className="section-head on-dark">
+          <div><h2>SHOP BY CATEGORY</h2><span className="eyebrow">we've got it all</span></div>
+          <a href="#" className="btn-outline on-dark">View All</a>
+        </div>
+        <div className="category-grid">
+          <div className="cat-card reveal"><img src="assets/prod4.jpg" alt="" /><span className="cat-num">01</span><span className="cat-label">LOUNGING AT HOME</span></div>
+          <div className="cat-card reveal"><img src="assets/prod3.jpg" alt="" /><span className="cat-num">02</span><span className="cat-label">TRAVEL EDIT</span></div>
+          <div className="cat-card reveal"><img src="assets/prod2.png" alt="" /><span className="cat-num">03</span><span className="cat-label">DAILY ESSENTIALS</span></div>
+          <div className="cat-card reveal"><img src="assets/prod1.png" alt="" /><span className="cat-num">04</span><span className="cat-label">DESK TO DINNER</span></div>
+        </div>
+      </section>
+
+      {/* THERE'S SOMETHING FOR EVERYONE */}
+      <section className="everyone-section">
+        <div className="everyone-inner" style={{ backgroundImage: 'url(assets/everyone.png)' }}>
+          <div>
+            <h2>THERE'S SOMETHING<br />FOR EVERYONE</h2>
+            <p>FIND YOUR SECOND SKIN</p>
+            <div className="btns">
+              <a href="#" className="btn">Shop Women</a>
+              <a href="#" className="btn">Shop Men</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FABRICS (interactive) */}
+      <Fabrics />
+
+      {/* FABRICS — branded CloudSoft variant (centered swatch + 4 callouts) */}
+      <CloudSoftFabrics />
+
+      {/* MOST LOVED */}
+      <section className="products">
+        <div className="section-head">
+          <div><h2>MOST LOVED</h2><span className="eyebrow">your favs</span></div>
+          <a href="#" className="btn-outline">View All</a>
+        </div>
+        <div className="product-grid">
+          <ProductCard img="assets/prod4.jpg" name="LOUNGE SET" sub="Stone / Modal" price="RS 4,500" />
+          <ProductCard img="assets/prod2.png" name="CROPPED RIB" sub="Ecru / Jersey" price="RS 2,400" />
+          <ProductCard img="assets/prod1.png" name="ESSENTIAL TEE" sub="Oatmeal / Jersey" price="RS 2,000" />
+          <ProductCard img="assets/prod3.jpg" name="KNITTED PANTS" sub="Sand / Terry" price="RS 3,250" />
+        </div>
+      </section>
+
+      {/* TESTIMONIALS (interactive) */}
+      <Testimonials />
+
+      {/* FAQ */}
+      <section className="faq-section">
+        <h2>FREQUENTLY ASKED QUESTIONS</h2>
+        <FAQ />
+      </section>
+
+      <Footer />
+    </div>);
+
+}
+
+function FAQ() {
+  const [open, setOpen] = useState(0);
+  const items = [
+  { q: 'What is your fabric sourcing philosophy?', a: 'We source long-staple cottons and botanical-origin fibres certified under GOTS and Oeko-Tex 100. Every roll is traced back to the mill.' },
+  { q: 'How does sizing work?', a: 'Our fit is relaxed but not oversized. If you\'re between sizes, go up for lounge and down for hybrid silhouettes.' },
+  { q: 'What is the return policy?', a: 'Free returns within 15 days of delivery, on unworn pieces with tags intact.' },
+  { q: 'Do you ship internationally?', a: 'Yes — we ship worldwide. Duties and taxes are calculated at checkout.' },
+  { q: 'How should I care for my Second Form pieces?', a: 'Cold machine wash inside-out on gentle cycle, line dry. Our fabrics soften beautifully with every wash.' }];
+
+  return (
+    <>
+      {items.map((it, i) =>
+      <div key={i} className={"faq-item " + (i === open ? 'open' : '')} onClick={() => setOpen(open === i ? -1 : i)}>
+          <div className="faq-q"><span>{it.q}</span><span className="plus">+</span></div>
+          <div className="faq-a">{it.a}</div>
+        </div>
+      )}
+    </>);
+
+}
+
+// ========== TWEAKS ==========
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "loungePhraseUppercase": true,
+  "everyoneSectionHeight": 600,
+  "accentOnSwirl": true
+}/*EDITMODE-END*/;
+window.__tweaks = { ...TWEAK_DEFAULTS };
+
+function TweaksPanel() {
+  const [on, setOn] = useState(false);
+  const [state, setState] = useState({ ...window.__tweaks });
+
+  useEffect(() => {
+    function handler(e) {
+      if (!e.data) return;
+      if (e.data.type === '__activate_edit_mode') setOn(true);
+      if (e.data.type === '__deactivate_edit_mode') setOn(false);
+    }
+    window.addEventListener('message', handler);
+    window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+    return () => window.removeEventListener('message', handler);
+  }, []);
+
+  function update(patch) {
+    const next = { ...state, ...patch };
+    setState(next);
+    window.__tweaks = next;
+    // trigger re-render of consumers + apply DOM side effects
+    window.dispatchEvent(new Event('tweaks-changed'));
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: patch }, '*');
+  }
+
+  if (!on) return null;
+  return (
+    <div style={{
+      position:'fixed', right:20, bottom:20, zIndex:9999,
+      background:'#fff', border:'1px solid #E7E5E4', borderRadius:8,
+      padding:'18px 20px', width:280, fontFamily:'Funnel Sans, sans-serif',
+      boxShadow:'0 12px 40px rgba(0,0,0,0.14)', color:'#332925'
+    }}>
+      <div style={{fontFamily:'Funnel Display, serif', fontWeight:700, fontSize:16, marginBottom:14, letterSpacing:'-0.01em'}}>Tweaks</div>
+
+      <label style={{display:'flex',alignItems:'center',justifyContent:'space-between',fontSize:13,marginBottom:14,cursor:'pointer'}}>
+        <span>Uppercase lounge phrase</span>
+        <input type="checkbox" checked={!!state.loungePhraseUppercase} onChange={e=>update({loungePhraseUppercase:e.target.checked})}/>
+      </label>
+
+      <label style={{display:'flex',flexDirection:'column',fontSize:13,marginBottom:14,gap:6}}>
+        <span>"Everyone" section height: <b>{state.everyoneSectionHeight}px</b></span>
+        <input type="range" min="349" max="800" step="1" value={state.everyoneSectionHeight}
+               onChange={e=>update({everyoneSectionHeight: parseInt(e.target.value, 10)})}/>
+      </label>
+
+      <label style={{display:'flex',alignItems:'center',justifyContent:'space-between',fontSize:13,marginBottom:0,cursor:'pointer'}}>
+        <span>Tint logo swirl chocolate</span>
+        <input type="checkbox" checked={!!state.accentOnSwirl} onChange={e=>update({accentOnSwirl:e.target.checked})}/>
+      </label>
+    </div>
+  );
+}
+
+// Small consumer that re-renders when tweaks change, to drive live updates
+function TweakObserver({ children }) {
+  const [, force] = useState(0);
+  useEffect(() => {
+    const h = () => force(x => x + 1);
+    window.addEventListener('tweaks-changed', h);
+    return () => window.removeEventListener('tweaks-changed', h);
+  }, []);
+  return children;
+}
+
+// apply DOM-side tweak effects (section height, swirl tint)
+function applyTweakSideEffects() {
+  const t = window.__tweaks || {};
+  const inner = document.querySelector('.everyone-inner');
+  if (inner) inner.style.height = (t.everyoneSectionHeight || 600) + 'px';
+  document.documentElement.style.setProperty('--swirl-tint', t.accentOnSwirl ? 'var(--chocolate)' : 'currentColor');
+}
+window.addEventListener('tweaks-changed', applyTweakSideEffects);
+
+// Router
+function App() {
+  const [page, setPage] = useState(() => localStorage.getItem('sf_page') || 'home');
+  const [, force] = useState(0);
+  const navigate = (p) => {
+    setPage(p);
+    localStorage.setItem('sf_page', p);
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  };
+  useEffect(() => {
+    // reveal on scroll
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) e.target.classList.add('in');
+      });
+    }, { threshold: 0.1 });
+    setTimeout(() => {
+      document.querySelectorAll('.reveal').forEach((el) => obs.observe(el));
+    }, 50);
+    return () => obs.disconnect();
+  }, [page]);
+
+  useEffect(() => {
+    // apply side effects on initial render
+    applyTweakSideEffects();
+    const h = () => force(x => x + 1);
+    window.addEventListener('tweaks-changed', h);
+    return () => window.removeEventListener('tweaks-changed', h);
+  }, []);
+
+  return (
+    <>
+      {page === 'b2b' ? <B2BPage navigate={navigate} /> : <HomePage navigate={navigate} />}
+      <TweaksPanel/>
+    </>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
