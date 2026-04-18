@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Second Form — Fashion that moves with you</title>
 <link href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400;500;700;800&family=Funnel+Sans:wght@300;400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=4"/>
+<link rel="stylesheet" href="styles.css?v=5"/>
 </head>
 <body>
 <div id="root"></div>
@@ -13,9 +13,6 @@
 <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
 <script>
-/* ============================================================
-   components.jsx (inlined)
-   ============================================================ */
 /* Components */
 const {
   useState,
@@ -198,7 +195,11 @@ function Nav({
   };
   return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
     className: "nav"
-  }, /*#__PURE__*/React.createElement("a", {
+  }, /*#__PURE__*/React.createElement("button", {
+    className: "nav-hamburger",
+    "aria-label": "open menu",
+    onClick: () => setMenuOpen(true)
+  }, /*#__PURE__*/React.createElement(IconMenu, null)), /*#__PURE__*/React.createElement("a", {
     href: "#",
     className: "logo",
     onClick: e => {
@@ -241,11 +242,7 @@ function Nav({
       justifyContent: 'center',
       fontFamily: 'Funnel Sans'
     }
-  }, "2")), /*#__PURE__*/React.createElement("button", {
-    className: "nav-hamburger",
-    "aria-label": "open menu",
-    onClick: () => setMenuOpen(true)
-  }, /*#__PURE__*/React.createElement(IconMenu, null)))), /*#__PURE__*/React.createElement("div", {
+  }, "2")))), /*#__PURE__*/React.createElement("div", {
     className: "mobile-drawer" + (menuOpen ? ' open' : ''),
     "aria-hidden": !menuOpen
   }, /*#__PURE__*/React.createElement("div", {
@@ -362,6 +359,7 @@ function LoungePhrase() {
       if (!ref.current) return;
       const r = ref.current.getBoundingClientRect();
       const vh = window.innerHeight;
+      // progress: 0 when top reaches bottom of viewport, 1 when bottom passes top of viewport
       const total = r.height + vh * 0.8;
       const traveled = vh - r.top;
       const p = Math.max(0, Math.min(1, traveled / total));
@@ -385,6 +383,7 @@ function LoungePhrase() {
     rot: -progress * 360
   }), /*#__PURE__*/React.createElement("h2", null, words.map((w, i) => {
     const wordP = i / words.length;
+    // fade from bone -> chocolate as progress passes each word threshold
     const on = progress * 1.15 > wordP;
     return /*#__PURE__*/React.createElement("span", {
       key: i,
@@ -396,9 +395,23 @@ function LoungePhrase() {
   })));
 }
 
-/* ============================================================
-   interactive.jsx (inlined)
-   ============================================================ */
+// Make components global so they can be used across script files (though we use one file)
+Object.assign(window, {
+  IconSearch,
+  IconBag,
+  IconArrow,
+  Nav,
+  BrandLogo,
+  DecoVector,
+  ProductCard,
+  LoungePhrase
+});
+
+// Fabrics interactive section
+const {
+  useState: useStateF,
+  useEffect: useEffectF
+} = React;
 const FABRICS = [{
   key: 'terry',
   name: 'French Terry',
@@ -457,7 +470,7 @@ const FABRICS = [{
   props: [['100%', 'Heavy Cotton'], ['340 gsm', 'Structured']]
 }];
 function Fabrics() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useStateF(0);
   const f = FABRICS[active];
   return /*#__PURE__*/React.createElement("section", {
     className: "fabrics",
@@ -500,6 +513,8 @@ function Fabrics() {
     className: "fabric-prop"
   }, /*#__PURE__*/React.createElement("b", null, b), /*#__PURE__*/React.createElement("span", null, s))))))));
 }
+
+// Testimonials
 const TESTIMONIALS = [{
   quote: "The quality is exceptional. Every piece feels luxurious and thoughtfully made. These have become my go-to pieces for work from home and beyond.",
   name: "— Priya Sharma",
@@ -526,11 +541,11 @@ const TESTIMONIALS = [{
   img: "assets/prod4.jpg"
 }];
 function Testimonials() {
-  const [i, setI] = useState(0);
+  const [i, setI] = useStateF(0);
   const t = TESTIMONIALS[i];
   const prev = () => setI((i - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
   const next = () => setI((i + 1) % TESTIMONIALS.length);
-  useEffect(() => {
+  useEffectF(() => {
     const id = setInterval(next, 7000);
     return () => clearInterval(id);
   }, [i]);
@@ -583,6 +598,14 @@ function Testimonials() {
     onClick: () => setI(idx)
   })))))), /*#__PURE__*/React.createElement("style", null, `@keyframes fadein { from { opacity:0; transform: translateY(12px);} to {opacity:1; transform:none;} }`));
 }
+Object.assign(window, {
+  Fabrics,
+  Testimonials,
+  FABRICS,
+  TESTIMONIALS
+});
+
+// ---- CloudSoft-style fabrics block (branded ™ tabs, centered swatch, 4 callout tiles) ----
 const CS_FABRICS = [{
   key: 'cloudsoft',
   label: 'CLOUDSOFT™',
@@ -627,8 +650,30 @@ const CS_FABRICS = [{
   cells: [['TEXTURED HAND', 'A tactile rib with dimensional depth.'], ['BODY-SKIMMING', 'Follows your shape without clinging.'], ['STRUCTURED STRETCH', 'Holds its form through the day.'], ['ENDLESSLY LAYERABLE', 'Pairs with everything in the wardrobe.']]
 }];
 function CloudSoftFabrics() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useStateF(0);
+  const gridRef = React.useRef(null);
   const f = CS_FABRICS[active];
+  useEffectF(() => {
+    if (!gridRef.current) return;
+    function equalize() {
+      const cells = gridRef.current.querySelectorAll('.cs-cell');
+      cells.forEach(c => {
+        c.style.height = 'auto';
+      });
+      requestAnimationFrame(() => {
+        if (!gridRef.current) return;
+        const heights = Array.from(cells).map(c => c.getBoundingClientRect().height);
+        const maxH = Math.max(...heights);
+        cells.forEach(c => {
+          c.style.height = maxH + 'px';
+        });
+      });
+    }
+    equalize();
+    const ro = new ResizeObserver(equalize);
+    ro.observe(gridRef.current);
+    return () => ro.disconnect();
+  }, [active]);
   return /*#__PURE__*/React.createElement("section", {
     className: "cs-fabrics",
     id: "cs-fabrics-section"
@@ -641,7 +686,8 @@ function CloudSoftFabrics() {
     className: "cs-fab-tab " + (i === active ? 'active' : ''),
     onClick: () => setActive(i)
   }, ff.label))), /*#__PURE__*/React.createElement("div", {
-    className: "cs-fab-grid"
+    className: "cs-fab-grid",
+    ref: gridRef
   }, /*#__PURE__*/React.createElement("div", {
     className: "cs-cell cs-cell-tl"
   }, /*#__PURE__*/React.createElement("h4", null, f.cells[0][0]), /*#__PURE__*/React.createElement("p", null, f.cells[0][1])), /*#__PURE__*/React.createElement("div", {
@@ -666,10 +712,15 @@ function CloudSoftFabrics() {
     className: "cs-cell cs-cell-br"
   }, /*#__PURE__*/React.createElement("h4", null, f.cells[3][0]), /*#__PURE__*/React.createElement("p", null, f.cells[3][1]))));
 }
+Object.assign(window, {
+  CloudSoftFabrics,
+  CS_FABRICS
+});
 
-/* ============================================================
-   b2b.jsx (inlined)
-   ============================================================ */
+// B2B page
+const {
+  useState: useStateB
+} = React;
 function B2BPage({
   navigate
 }) {
@@ -902,10 +953,10 @@ function Footer() {
     className: "it"
   }, "Built on the foundation of export-grade manufacturing, designed for modern teams.")));
 }
-
-/* ============================================================
-   App (was inline)
-   ============================================================ */
+Object.assign(window, {
+  B2BPage,
+  Footer
+});
 
 // Rotating deco vectors that rotate on scroll — using the real Figma squiggly ring shapes
 function ScrollVectors() {
@@ -968,7 +1019,11 @@ function HomePage({
     }
   }, /*#__PURE__*/React.createElement("div", {
     className: "hero-content"
-  }, /*#__PURE__*/React.createElement("h1", null, "MADE FOR SLOW", /*#__PURE__*/React.createElement("br", null), "MORNINGS, LONG DAYS,", /*#__PURE__*/React.createElement("br", null), "AND EVERYTHING IN", /*#__PURE__*/React.createElement("br", null), "BETWEEN."), /*#__PURE__*/React.createElement("p", {
+  }, /*#__PURE__*/React.createElement("h1", {
+    style: {
+      fontSize: "66px"
+    }
+  }, "MADE FOR SLOW", /*#__PURE__*/React.createElement("br", null), "MORNINGS, LONG DAYS,", /*#__PURE__*/React.createElement("br", null), "AND EVERYTHING IN", /*#__PURE__*/React.createElement("br", null), "BETWEEN."), /*#__PURE__*/React.createElement("p", {
     className: "tagline"
   }, "Fashion that moves with you"), /*#__PURE__*/React.createElement("a", {
     href: "#",

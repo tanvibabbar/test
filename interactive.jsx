@@ -165,7 +165,27 @@ const CS_FABRICS = [
 
 function CloudSoftFabrics() {
   const [active, setActive] = useStateF(0);
+  const gridRef = React.useRef(null);
   const f = CS_FABRICS[active];
+
+  useEffectF(() => {
+    if (!gridRef.current) return;
+    function equalize() {
+      const cells = gridRef.current.querySelectorAll('.cs-cell');
+      cells.forEach(c => { c.style.height = 'auto'; });
+      requestAnimationFrame(() => {
+        if (!gridRef.current) return;
+        const heights = Array.from(cells).map(c => c.getBoundingClientRect().height);
+        const maxH = Math.max(...heights);
+        cells.forEach(c => { c.style.height = maxH + 'px'; });
+      });
+    }
+    equalize();
+    const ro = new ResizeObserver(equalize);
+    ro.observe(gridRef.current);
+    return () => ro.disconnect();
+  }, [active]);
+
   return (
     <section className="cs-fabrics" id="cs-fabrics-section">
       <h2 className="cs-fab-title">OUR FABRICS</h2>
@@ -176,7 +196,7 @@ function CloudSoftFabrics() {
           </button>
         ))}
       </div>
-      <div className="cs-fab-grid">
+      <div className="cs-fab-grid" ref={gridRef}>
         <div className="cs-cell cs-cell-tl">
           <h4>{f.cells[0][0]}</h4>
           <p>{f.cells[0][1]}</p>
