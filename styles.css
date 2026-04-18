@@ -916,31 +916,31 @@ footer .foot-bottom .it { font-style: italic; }
   .cs-fab-tab { white-space: nowrap; flex-shrink: 0; }
   .cs-fab-grid {
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto auto;
-    gap: 12px;
+    gap: 16px;
     padding: 0;
     align-items: start;
+    /* auto-flow fills row by row; swatch goes last via order */
   }
   /* cell heights driven by JS equalization; reset CSS constraints */
   .cs-cell { height: auto; min-height: unset; box-sizing: border-box; overflow: hidden; }
+  /* 2×2 grid: tl tr / bl br — then swatch below */
   .cs-cell-tl { order: 1; }
   .cs-cell-tr { order: 2; }
-  .cs-cell-bl { order: 4; }
-  .cs-cell-br { order: 5; }
+  .cs-cell-bl { order: 3; }
+  .cs-cell-br { order: 4; }
   .cs-swatch-wrap {
+    order: 5;
     grid-column: 1 / span 2;
-    grid-row: auto;
-    order: 3;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 16px 0;
+    padding: 24px 0 0;
   }
   .cs-swatch {
-    width: min(280px, 85vw);
-    height: 260px;
-    transform: none;
-    border-radius: 12px;
+    width: min(300px, 80vw);
+    height: min(300px, 80vw);
+    transform: rotate(5deg);
+    border-radius: 18px;
     margin: 0 auto;
   }
 }
