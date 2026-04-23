@@ -24,30 +24,7 @@ const { useState, useEffect, useRef } = React;
 
 // Rotating deco vectors that rotate on scroll — using the real Figma squiggly ring shapes
 function ScrollVectors() {
-  const [scrollY, setScrollY] = useState(0);
-  useEffect(() => {
-    const h = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', h, { passive: true });
-    return () => window.removeEventListener('scroll', h);
-  }, []);
-  // The vectors sit flanking the lounge phrase. Rotate them on scroll — one cw, one ccw.
-  const rot = scrollY * 0.22;
-  return (
-    <>
-      {/* Left-side squiggly ring — warm taupe, anticlockwise */}
-      <div style={{ position: 'absolute', top: '-68px', left: '40px', width: 160, height: 80, pointerEvents: 'none',
-        transform: `rotate(${-rot}deg)`, transformOrigin: '50% 50%', willChange: 'transform', opacity: 1,
-        background: 'var(--warm-taupe)',
-        WebkitMask: 'url(assets/Logo.svg) center / contain no-repeat',
-        mask: 'url(assets/Logo.svg) center / contain no-repeat' }} />
-      {/* Right-side squiggly ring — chocolate, clockwise */}
-      <div style={{ position: 'absolute', bottom: '-40px', right: '5%', width: 210, height: 130, pointerEvents: 'none',
-        transform: `rotate(${rot}deg)`, transformOrigin: '50% 50%', willChange: 'transform', opacity: 0.6,
-        background: 'var(--chocolate)',
-        WebkitMask: 'url(assets/Logo-striped.svg) center / contain no-repeat',
-        mask: 'url(assets/Logo-striped.svg) center / contain no-repeat' }} />
-    </>);
-
+  return null;
 }
 
 function HomePage({ navigate }) {

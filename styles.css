@@ -947,3 +947,14 @@ footer .foot-bottom .it { font-style: italic; }
     margin: 0 auto;
   }
 }
+
+/* Hide rotating logos */
+.deco-vector { display: none; }
+
+/* Fabric section visibility: desktop shows Fabrics, mobile shows CloudSoftFabrics */
+#cs-fabrics-section { display: none; }
+
+@media (max-width: 900px) {
+  #fabrics-section { display: none; }
+  #cs-fabrics-section { display: block; }
+}
